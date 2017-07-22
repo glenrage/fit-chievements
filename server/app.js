@@ -41,10 +41,10 @@ if(isProduction){
   });
 }
 
-// require('./models/User');
-// require('./models/Article');
-// require('./models/Comment');
-// require('./config/passport');
+require('./models/User');
+require('./models/Achievement');
+require('./models/Comment');
+require('./config/passport');
 
 app.use(require('./routes'));
 
