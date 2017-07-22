@@ -1,15 +1,14 @@
 'use strict';
-
-import http from 'http'
-import path from 'path'
-import methods from 'methods'
-import express from 'express'
-import bodyParser from 'body-parser'
-import session from 'express-session'
-import cors from 'cors'
-import passport from 'passport'
-import errorhandler from 'errorhandler'
-import mongoose from 'mongoose'
+const http = require('http'),
+      path = require('path'),
+      methods = require('methods'),
+      express = require('express'),
+      bodyParser = require('body-parser'),
+      session = require('express-session'),
+      cors = require('cors'),
+      passport = require('passport'),
+      errorhandler = require('errorhandler'),
+      mongoose = require('mongoose');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -35,8 +34,11 @@ if (!isProduction) {
 if(isProduction){
   mongoose.connect(process.env.MONGODB_URI);
 } else {
-  mongoose.connect('mongodb://localhost/fit-chievements');
+  mongoose.connect('mongodb://localhost:27017/fit-chievements');
   mongoose.set('debug', true);
+  mongoose.connection.once('open', function() {
+  console.log(`Connected to mongoDB at  + ${process.env.MONGODB_URI}`)
+  });
 }
 
 // require('./models/User');
