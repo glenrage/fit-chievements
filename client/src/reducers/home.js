@@ -4,6 +4,8 @@ export default (state = {}, action) => {
       return {
         ...state,
         achievements: action.payload.achievements
-      }
+      };
   }
+
+  return state;
 }

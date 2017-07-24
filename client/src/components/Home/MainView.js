@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
-  achievements: state.achievements
+  achievements: state.home.achievements
 })
 
 const MainView = props => {

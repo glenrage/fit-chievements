@@ -1,18 +1,17 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { promiseMiddleware } from './middleware';
+import auth from './reducers/auth';
+import common from './reducers/common';
+import home from './reducers/home';
 
 const defaultState = {
-  appName: 'fit-goals',
+  appName: 'Fit-Goals',
   achievements: null
  };
 
-const reducer = function(state = defaultState, action) {
-  switch (action.type) {
-    case 'HOME_PAGE_LOADED' :
-      return { ...state, achievements: action.payload.achievements};
-  }
-  return state;
-};
+const reducer = combineReducers({
+  auth, common, home
+});
 
 const middleware = applyMiddleware(promiseMiddleware);
 
