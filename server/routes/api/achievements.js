@@ -2,7 +2,7 @@
 
 const router = require('express').Router();
 const mongoose = require('mongoose');
-const Article = mongoose.model('Article');
+const Achievement = mongoose.model('Achievement');
 const Comment = mongoose.model('Comment');
 const User = mongoose.model('User');
 const auth = require('../auth');
@@ -157,7 +157,7 @@ router.put('/:achievement', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(user => {
     if(req.achievement.author._id.toString() === req.payload.id.toString()) {
       if(typeof req.body.achievement.title !== 'undefined') {
-        req.article.title = req.body.achievement.title;
+        req.achievement.title = req.body.achievement.title;
       }
 
       if(typeof req.body.achievement.description !== 'undefined') {
@@ -168,7 +168,7 @@ router.put('/:achievement', auth.required, function(req, res, next) {
         req.achievement.tagList = req.body.achievement.tagList
       }
 
-      req.achievement.save().then(article => {
+      req.achievement.save().then(achievement => {
         return res.json({achievement: achievement.toJSONFor(user)});
       }).catch(next);
     } else {
