@@ -5,7 +5,7 @@ import { connect, dispatch } from 'react-redux';
 
 const mapStateToProps = state => ({ ...state.auth });
 
-const mapDispatchToProps = dispath => ({
+const mapDispatchToProps = dispatch => ({
   onChangeEmail: value =>
     dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'email', value }),
   onChangePassword: value =>
