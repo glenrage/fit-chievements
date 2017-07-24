@@ -37,7 +37,7 @@ if(isProduction){
   mongoose.connect('mongodb://localhost:27017/fit-chievements');
   mongoose.set('debug', true);
   mongoose.connection.once('open', function() {
-  console.log(`Connected to mongoDB at  + ${process.env.MONGODB_URI}`)
+    console.log(`Connected to mongoDB at  + ${process.env.MONGODB_URI}`)
   });
 }
 
