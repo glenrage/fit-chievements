@@ -14,7 +14,8 @@ const ArticleActions = props => {
   const del = () => {
     props.onClickDelete(agent.Articles.del(article.slug))
   };
-  if (props) {
+
+  if (props.canModify) {
     return (
       <span>
 
@@ -28,7 +29,7 @@ const ArticleActions = props => {
           <i className="ion-trash-a"></i>Delete Achievement
         </button>
       </span>
-    );
+    ); 
   }
 
   return (

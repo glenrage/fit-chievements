@@ -1,5 +1,5 @@
 import ArticleMeta from './ArticleMeta';
-// import CommentContainer from './CommentContainer';
+import CommentContainer from './CommentContainer';
 import { Link } from 'react-router';
 import React from 'react';
 import agent from '../../agent';
@@ -79,7 +79,11 @@ class Article extends React.Component {
 
       <div className="row">
 
-
+      <CommentContainer
+        comments={this.props.comments || []}
+        errors={this.props.commentErrors}
+        slug={this.props.params.id}
+        currentUser={this.props.currentUser} />
         </div>
       </div>
     </div>
@@ -88,11 +92,3 @@ class Article extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article);
-
-
-
-// <CommentContainer
-//   comments={this.props.comments || []}
-//   errors={this.props.commentErrors}
-//   slug={this.props.params.id}
-//   currentUser={this.props.currentUser} />

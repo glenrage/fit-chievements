@@ -1,5 +1,6 @@
 import CommentInput from './CommentInput';
 import CommentList from './CommentList';
+import ListErrors from '../ListErrors'
 import { Link } from 'react-router';
 import React from 'react';
 
