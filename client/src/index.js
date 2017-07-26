@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Settings from './components/Settings';
 import Article from './components/Article';
+import Profile from './components/Profile';
 import store from './store';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
@@ -20,6 +21,7 @@ ReactDOM.render((
       <Route path="register" component={Register} />
       <Route path="settings" component={Settings} />
       <Route path="article/:id" component={Article} />
+      <Route path="@:username" component={Profile} />
       </Route>
     </Router>
   </Provider>
