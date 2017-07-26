@@ -9,7 +9,7 @@ const Comment = props => {
   return (
     <div className="card">
       <div className="card-block">
-        <p className="card-text"> {comment.body} </p>
+        <p className="card-text">{comment.body}</p>
       </div>
       <div className="card-footer">
         <Link

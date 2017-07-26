@@ -1,27 +1,10 @@
+'use strict';
+
 import ArticleList from './ArticleList';
 import React from 'react';
 import { Link } from 'react-router';
 import agent from '../agent';
 import { connect } from 'react-redux';
-
-const mapStateToProps = state => ({
-  ...state.articleList,
-  currentUser: state.common.currentUser,
-  profile: state.profile
-});
-
-const mapDispatchToProps = dispatch => ({
-  onFollow: username => dispatch({
-    type: 'FOLLOW_USER',
-    payload: agent.Profile.follow(username)
-  }),
-  onLoad: payload => dispatch({
-    type: 'PROFILE_PAGE_LOADED', payload }),
-  onUnfollow: username => dispatch({
-    payload: agent.Profile.unfollow(username)
-  }),
-  onUnload: () => dispatch({ type: 'PROFILE_PAGE_UNLOADED' })
-});
 
 const EditProfileSettings = props => {
   if (props.isUser) {
@@ -34,18 +17,18 @@ const EditProfileSettings = props => {
     );
   }
   return null;
-}
+};
 
 const FollowUserButton = props => {
-  if (props.isUser) {
+  if (!props.isUser) {
     return null;
   }
 
   let classes = 'btn btn-sm action-btn';
   if (props.user.following) {
-    classes += 'btn-secondary';
+    classes += ' btn-secondary';
   } else {
-    classes += 'btn-outline-secondary';
+    classes += ' btn-outline-secondary';
   }
 
   const handleClick = ev => {
@@ -68,6 +51,25 @@ const FollowUserButton = props => {
   );
 };
 
+const mapStateToProps = state => ({
+  ...state.articleList,
+  currentUser: state.common.currentUser,
+  profile: state.profile
+});
+
+const mapDispatchToProps = dispatch => ({
+  onFollow: username => dispatch({
+    type: 'FOLLOW_USER',
+    payload: agent.Profile.follow(username)
+  }),
+  onLoad: payload => dispatch({ type: 'PROFILE_PAGE_LOADED', payload }),
+  onUnfollow: username => dispatch({
+    type: 'UNFOLLOW_USER',
+    payload: agent.Profile.unfollow(username)
+  }),
+  onUnload: () => dispatch({ type: 'PROFILE_PAGE_UNLOADED' })
+});
+
 class Profile extends React.Component {
   componentWillMount() {
     this.props.onLoad(Promise.all([
@@ -86,6 +88,14 @@ class Profile extends React.Component {
         <li className="nav-item">
           <Link
             className="nav-link active"
+            to={`@${this.props.profile.username}`}>
+            My Articles
+          </Link>
+        </li>
+
+        <li className="nav-item">
+          <Link
+            className="nav-link"
             to={`@${this.props.profile.username}/favorites`}>
             Favorited Articles
           </Link>
@@ -100,48 +110,55 @@ class Profile extends React.Component {
       return null;
     }
 
-    const isUser = this.props.currentUser &&
-      this.props.profile.username === this.props.currentUser.username;
+    const canEdit = this.props.currentUser &&
+      this.props.currentUser.username === profile.username
 
-      return (
-        <div className="profile-page">
+    const canFollow = this.props.currentUser &&
+      this.props.currentUser.username !== profile.username
 
-          <div className="user-info">
-            <div className="container">
-              <div className="row">
-                <div className="col-xs-12 col-md-10 offset-md-1">
+    return (
+      <div className="profile-page">
+
+        <div className="user-info">
+          <div className="container">
+            <div className="row">
+              <div className="col-xs-12 col-md-10 offset-md-1">
 
                 <img src={profile.image} className="user-img" />
                 <h4>{profile.username}</h4>
                 <p>{profile.bio}</p>
 
-                <EditProfileSettings isUser={isUser} />
+                <EditProfileSettings isUser={canEdit} />
                 <FollowUserButton
-                  isUser={isUser}
+                  isUser={canFollow}
                   user={profile}
-                  follow={this.props.unFollow}
+                  follow={this.props.onFollow}
                   unfollow={this.props.onUnfollow}
                   />
-                </div>
+
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="container">
-            <div className="row">
-              <div className="col-xs-12 col-md-10 offset-md-1">
+        <div className="container">
+          <div className="row">
 
-                <div className="articles-toggle">
-                  {this.renderTabs()}
-                </div>
+            <div className="col-xs-12 col-md-10 offset-md-1">
 
-                <ArticleList
-                  articles={this.props.articles} />
-                </div>
+              <div className="articles-toggle">
+                {this.renderTabs()}
               </div>
+
+              <ArticleList
+                articles={this.props.articles} />
             </div>
+
           </div>
-      );
+        </div>
+
+      </div>
+    );
   }
 }
 

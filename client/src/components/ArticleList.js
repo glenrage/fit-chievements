@@ -1,8 +1,10 @@
-import React from 'react';
+'use strict';
+
 import ArticlePreview from './ArticlePreview';
+import React from 'react';
 
 const ArticleList = props => {
-  if(!props.articles) {
+  if (!props.articles) {
     return (
       <div className="article-preview">Loading...</div>
     );
@@ -10,8 +12,10 @@ const ArticleList = props => {
 
   if (props.articles.length === 0) {
     return (
-      <div className="article-preview">No articles here yet...</div>
-    )
+      <div className="article-preview">
+        No articles are here... yet.
+      </div>
+    );
   }
 
   return (
@@ -23,7 +27,7 @@ const ArticleList = props => {
           );
         })
       }
-      </div>
+    </div>
   );
 };
 

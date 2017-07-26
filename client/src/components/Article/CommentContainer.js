@@ -1,6 +1,5 @@
 import CommentInput from './CommentInput';
 import CommentList from './CommentList';
-import ListErrors from '../ListErrors'
 import { Link } from 'react-router';
 import React from 'react';
 
@@ -9,7 +8,7 @@ const CommentContainer = props => {
     return (
       <div className="col-xs-12 col-md-8 offset-md-2">
         <div>
-          <ListErrors errors={props.errors}></ListErrors>
+          <list-errors errors={props.errors}></list-errors>
           <CommentInput slug={props.slug} currentUser={props.currentUser} />
         </div>
 
@@ -17,7 +16,7 @@ const CommentContainer = props => {
           comments={props.comments}
           slug={props.slug}
           currentUser={props.currentUser} />
-        </div>
+      </div>
     );
   } else {
     return (
@@ -25,15 +24,15 @@ const CommentContainer = props => {
         <p>
           <Link to="login">Sign in</Link>
           &nbsp;or&nbsp;
-          <Link to="register">Sign Up</Link>
-          &nbsp; to add comments on this achievement.
+          <Link to="register">sign up</Link>
+          &nbsp;to add comments on this article.
         </p>
 
         <CommentList
           comments={props.comments}
           slug={props.slug}
           currentUser={props.currentUser} />
-        </div>
+      </div>
     );
   }
 };
