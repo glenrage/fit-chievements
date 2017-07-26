@@ -21,6 +21,7 @@ router.param('article', function(req, res, next, slug) {
     }).catch(next);
 });
 
+
 router.param('comment', function(req, res, next, id) {
   Comment.findById(id).then(comment => {
     if (!comment) { return res.sendStatus(404); }

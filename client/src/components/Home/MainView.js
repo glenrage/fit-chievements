@@ -27,6 +27,4 @@ const MainView = props => {
   );
 };
 
-
-hh
 export default connect(mapStateToProps, () => ({}))(MainView)

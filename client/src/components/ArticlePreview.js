@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const articlePreview = props => {
+const ArticlePreview = props => {
   const article = props.article;
 
   return (
@@ -48,4 +48,4 @@ const articlePreview = props => {
   );
 }
 
-export default articlePreview;
+export default ArticlePreview;

@@ -9,16 +9,22 @@ const API_ROOT = " https://conduit.productionready.io/api";
 const responseBody = res => res.body;
 
 const requests = {
+  del: url =>
+    superagent.del(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
   get: url =>
     superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
   post: (url, body) =>
-    superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody)
+    superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
+  put: (url, body) =>
+    superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody)
 
 };
 
-const articles = {
+const Articles = {
   all: page =>
     requests.get(`/articles?limit=10`),
+  del: slug =>
+    requests.del(`/articles/${slug}`),
   get: slug =>
     requests.get(`/articles/${slug}`)
 };
@@ -35,7 +41,9 @@ const Auth = {
 }
 
 const Comments = {
-  forarticle: slug =>
+  create: (slug, comment) =>
+    requests.post(`/articles/${slug}/comments`, { comment }),
+   forArticle: slug =>
     requests.get(`/articles/${slug}/comments`)
 }
 
@@ -47,7 +55,7 @@ let tokenPlugin = req => {
 }
 
 export default {
-  articles,
+  Articles,
   Auth,
   Comments,
   setToken: _token => { token = _token; }

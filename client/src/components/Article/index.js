@@ -1,11 +1,5 @@
-// import articleMeta from './articleMeta';
+import ArticleMeta from './ArticleMeta';
 // import CommentContainer from './CommentContainer';
-
-// <articleMeta
-//   article={this.props.article}
-//   canModify={canModify} />
-
-
 import { Link } from 'react-router';
 import React from 'react';
 import agent from '../../agent';
@@ -19,16 +13,16 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onLoad: payload =>
-    dispatch({ type: 'article_PAGE_LOADED', payload }),
+    dispatch({ type: 'ARTICLE_PAGE_LOADED', payload }),
   onUnload: () =>
-    dispatch({ type: 'article_PAGE_UNLOADED'})
+    dispatch({ type: 'ARTICLE_PAGE_UNLOADED'})
 });
 
-class article extends React.Component {
+class Article extends React.Component {
   componentWillMount() {
     this.props.onLoad(Promise.all([
-      agent.articles.get(this.props.params.id),
-      agent.Comments.forarticle(this.props.params.id)
+      agent.Articles.get(this.props.params.id),
+      agent.Comments.forArticle(this.props.params.id)
     ]));
   }
 
@@ -50,7 +44,9 @@ class article extends React.Component {
           <div className="container">
 
           <h1>{this.props.article.title}</h1>
-
+          <ArticleMeta
+            article={this.props.article}
+            canModify={canModify} />
 
           </div>
         </div>
@@ -59,7 +55,7 @@ class article extends React.Component {
           <div className="row article-content">
             <div className="col-xs-12">
 
-              <div dangerouslySetInnerHTML={markup}></div> //render raw HTML, react sanitizes HTML by default
+              <div dangerouslySetInnerHTML={markup}></div>
 
               <ul className="tag-list">
               {
@@ -91,7 +87,8 @@ class article extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(article);
+export default connect(mapStateToProps, mapDispatchToProps)(Article);
+
 
 
 // <CommentContainer
