@@ -10,15 +10,6 @@ export default (state = {}, action) => {
         tab: action.tab,
         currentPage: 0
       };
-    case 'APPLY_TAG_FILTER':
-      return {
-        ...state,
-        articles: action.payload.articles,
-        articlesCount: action.payload.articlesCount,
-        tab: null,
-        tag: action.tag,
-        currentPage: 0
-      };
     case 'HOME_PAGE_UNLOADED':
       return {};
     case 'CHANGE_TAB':
@@ -37,6 +28,15 @@ export default (state = {}, action) => {
         articlesCount: action.payload.articlesCount,
         currentPage: action.page
       };
+    case 'APPLY_TAG_FILTER':
+      return {
+        ...state,
+        articles: action.payload.articles,
+        articlesCount: action.payload.articlesCount,
+        tab: null,
+        tag: action.tag,
+        currentPage: 0
+      };
     case 'PROFILE_PAGE_LOADED':
     case 'PROFILE_FAVORITES_PAGE_LOADED':
       return {
@@ -48,6 +48,21 @@ export default (state = {}, action) => {
     case 'PROFILE_PAGE_UNLOADED':
     case 'PROFILE_FAVORITES_PAGE_UNLOADED':
       return {};
+    case 'ARTICLE_FAVORITED':
+    case 'ARTICLE_UNFAVORITED':
+      return {
+        ...state,
+        articles: state.articles.map(article => {
+          if (article.slug === action.payload.article.slug) {
+            return {
+              ...article,
+              favorited: action.payload.favorited,
+              favoritesCount: action.payload.article.favoritesCount
+            };
+          }
+          return article;
+        })
+      };
   }
 
   return state;

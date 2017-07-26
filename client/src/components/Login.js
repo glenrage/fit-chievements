@@ -1,7 +1,8 @@
-import React from 'react';
+import { Link } from 'react-router';
 import ListErrors from './ListErrors';
+import React from 'react';
 import agent from '../agent';
-import { connect, dispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -11,18 +12,18 @@ const mapDispatchToProps = dispatch => ({
   onChangePassword: value =>
     dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'password', value }),
   onSubmit: (email, password) =>
-    dispatch({ type: 'LOGIN', payload: agent.Auth.login(email, password)}),
+    dispatch({ type: 'LOGIN', payload: agent.Auth.login(email, password) }),
   onUnload: () =>
-    dispatch({ type: 'LOGIN_PAGE_UNLOADED'})
+    dispatch({ type: 'LOGIN_PAGE_UNLOADED' })
 });
 
 class Login extends React.Component {
   constructor() {
     super();
-    this.changeEmail = event => this.props.onChangeEmail(event.target.value);
-    this.changePassword = event => this.props.onChangePassword(event.target.value);
-    this.submitForm = (email, password) => event => {
-      event.preventDefault();
+    this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
+    this.changePassword = ev => this.props.onChangePassword(ev.target.value);
+    this.submitForm = (email, password) => ev => {
+      ev.preventDefault();
       this.props.onSubmit(email, password);
     };
   }
@@ -32,18 +33,19 @@ class Login extends React.Component {
   }
 
   render() {
-    const { email, password } = this.props;
-
+    const email = this.props.email;
+    const password = this.props.password;
     return (
       <div className="auth-page">
         <div className="container page">
           <div className="row">
+
             <div className="col-md-6 offset-md-3 col-xs-12">
               <h1 className="text-xs-center">Sign In</h1>
               <p className="text-xs-center">
-                <a>
+                <Link to="register">
                   Need an account?
-                </a>
+                </Link>
               </p>
 
               <ListErrors errors={this.props.errors} />
@@ -57,8 +59,7 @@ class Login extends React.Component {
                       type="email"
                       placeholder="Email"
                       value={email}
-                      onChange={this.changeEmail}
-                      />
+                      onChange={this.changeEmail} />
                   </fieldset>
 
                   <fieldset className="form-group">
@@ -67,24 +68,24 @@ class Login extends React.Component {
                       type="password"
                       placeholder="Password"
                       value={password}
-                      onChange={this.changePassword}
-                      />
+                      onChange={this.changePassword} />
                   </fieldset>
 
                   <button
                     className="btn btn-lg btn-primary pull-xs-right"
                     type="submit"
-                    disabled={this.props.inProgress}
-                    >
-                    Sign In
+                    disabled={this.props.inProgress}>
+                    Sign in
                   </button>
-                  </fieldset>
+
+                </fieldset>
               </form>
             </div>
+
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

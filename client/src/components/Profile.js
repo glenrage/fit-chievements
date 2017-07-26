@@ -20,7 +20,7 @@ const EditProfileSettings = props => {
 };
 
 const FollowUserButton = props => {
-  if (!props.isUser) {
+  if (props.isUser) {
     return null;
   }
 
@@ -116,12 +116,6 @@ class Profile extends React.Component {
       return null;
     }
 
-    const canEdit = this.props.currentUser &&
-      this.props.currentUser.username === profile.username
-
-    const canFollow = this.props.currentUser &&
-      this.props.currentUser.username !== profile.username
-
     const isUser = this.props.currentUser &&
       this.props.profile.username === this.props.currentUser.username;
 
@@ -139,7 +133,7 @@ class Profile extends React.Component {
                 <h4>{profile.username}</h4>
                 <p>{profile.bio}</p>
 
-                <EditProfileSettings isUser={canEdit} />
+                <EditProfileSettings isUser={isUser} />
                 <FollowUserButton
                   isUser={isUser}
                   user={profile}
@@ -165,8 +159,7 @@ class Profile extends React.Component {
                 articles={this.props.articles}
                 articlesCount={this.props.articlesCount}
                 currentPage={this.props.currentPage}
-                onSetPage={onSetPage}
-                />
+                onSetPage={onSetPage} />
             </div>
 
           </div>

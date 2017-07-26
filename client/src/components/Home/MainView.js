@@ -1,7 +1,58 @@
 import ArticleList from '../ArticleList';
 import React from 'react';
-import { connect } from 'react-redux';
 import agent from '../../agent';
+import { connect } from 'react-redux';
+
+const YourFeedTab = props => {
+  if (props.token) {
+    const clickHandler = ev => {
+      ev.preventDefault();
+      props.onTabClick('feed', agent.Articles.feed());
+    }
+
+    return (
+      <li className="nav-item">
+        <a  href=""
+            className={ props.tab === 'feed' ? 'nav-link active' : 'nav-link' }
+            onClick={clickHandler}>
+          Your Feed
+        </a>
+      </li>
+    );
+  }
+  return null;
+};
+
+const GlobalFeedTab = props => {
+  const clickHandler = ev => {
+    ev.preventDefault();
+    props.onTabClick('all', agent.Articles.all());
+  };
+  return (
+    <li className="nav-item">
+      <a
+        href=""
+        className={ props.tab === 'all' ? 'nav-link active' : 'nav-link' }
+        onClick={clickHandler}>
+        Global Feed
+      </a>
+    </li>
+  );
+};
+
+const TagFilterTab = props => {
+  if (!props.tag) {
+    return null;
+  }
+
+  return (
+    <li className="nav-item">
+      <a href="" className="nav-link active">
+        <i className="ion-pound"></i> {props.tag}
+      </a>
+    </li>
+  );
+};
 
 const mapStateToProps = state => ({
   ...state.articleList,
@@ -17,60 +68,6 @@ const mapDispatchToProps = dispatch => ({
   onTabClick: (tab, payload) => dispatch({ type: 'CHANGE_TAB', tab, payload })
 });
 
-const UserFeedTab = props => {
-  if (props.token) {
-    const clickHandler = ev => {
-      ev.preventDefault();
-      props.onTabClick('feed', agent.Articles.feed());
-    }
-
-    return (
-      <li className="nav-item">
-        <a href=""
-          className={ props.tab === 'feed' ? 'nav-link active' : 'nav-link' }
-          onClick={clickHandler}>
-        Your Custom Feed
-      </a>
-    </li>
-    );
-  }
-  console.log('no user token')
-  return null;
-}
-
-const GlobalFeedTab = props => {
-  const clickHandler = ev => {
-    ev.preventDefault();
-    props.onTabClick('all', agent.Articles.all());
-  };
-
-  return (
-    <li className="nav-item">
-      <a href=""
-        className={ props.tab === 'all' ? 'nav-link active' : 'nav-link' }
-        onClick={clickHandler}
-      >
-      Global Feed
-    </a>
-  </li>
-  );
-};
-
-const TagFilterTab = props => {
-  if (!props.tag) {
-    return null;
-  }
-
-  return (
-    <li className="nav-item">
-      <a href="" className="nav-link active">
-        <i className="ion-pound"></i>
-          {props.tag}
-        </a>
-      </li>
-  );
-};
-
 const MainView = props => {
   const onSetPage = page => props.onSetPage(props.tab, page);
   return (
@@ -78,14 +75,14 @@ const MainView = props => {
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
 
-        <UserFeedTab
-          token={props.token}
-          tab={props.tab}
-          onTabClick={props.onTabClick} />
+          <YourFeedTab
+            token={props.token}
+            tab={props.tab}
+            onTabClick={props.onTabClick} />
 
-        <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
+          <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
 
-        <TagFilterTab tag={props.tag} />
+          <TagFilterTab tag={props.tag} />
 
         </ul>
       </div>
@@ -94,8 +91,7 @@ const MainView = props => {
         articles={props.articles}
         articlesCount={props.articlesCount}
         currentPage={props.currentPage}
-        onSetPage={onSetPage}
-        />
+        onSetPage={onSetPage} />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import agent from '../agent';
 
 const ListPagination = props => {
   if (props.articlesCount <= 10) {
@@ -15,6 +16,7 @@ const ListPagination = props => {
   return (
     <nav>
       <ul className="pagination">
+
         {
           range.map(v => {
             const isCurrent = v === props.currentPage;
@@ -28,13 +30,13 @@ const ListPagination = props => {
                 onClick={onClick}
                 key={v.toString()}>
 
-                <a className="page-link" href="">
-                {v + 1}
-                </a>
+                <a className="page-link" href="">{v + 1}</a>
+
               </li>
             );
           })
         }
+
       </ul>
     </nav>
   );

@@ -31,9 +31,8 @@ class Editor extends React.Component {
     this.changeTitle = updateFieldEvent('title');
     this.changeDescription = updateFieldEvent('description');
     this.changeBody = updateFieldEvent('body');
-    this.changeTagInput - updateFieldEvent('tagInput');
+    this.changeTagInput = updateFieldEvent('tagInput');
 
-    // When inputting tags, hitting enter adds a tag to the list
     this.watchForEnter = ev => {
       if (ev.keyCode === 13) {
         ev.preventDefault();
@@ -44,9 +43,6 @@ class Editor extends React.Component {
     this.removeTagHandler = tag => () => {
       this.props.onRemoveTag(tag);
     };
-
-    //When submitting form, the object must be correctly formatted.
-    //If there is a slug, update article, else, create a new one.
 
     this.submitForm = ev => {
       ev.preventDefault();
@@ -62,7 +58,7 @@ class Editor extends React.Component {
         agent.Articles.update(Object.assign(article, slug)) :
         agent.Articles.create(article);
 
-        this.props.onSubmit(promise);
+      this.props.onSubmit(promise);
     };
   }
 
@@ -112,7 +108,7 @@ class Editor extends React.Component {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="description goes here"
+                      placeholder="What's this article about?"
                       value={this.props.description}
                       onChange={this.changeDescription} />
                   </fieldset>
@@ -131,24 +127,24 @@ class Editor extends React.Component {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="Enter Hash Tags"
+                      placeholder="Enter tags"
                       value={this.props.tagInput}
                       onChange={this.changeTagInput}
                       onKeyUp={this.watchForEnter} />
 
                     <div className="tag-list">
-                    {
-                      (this.props.tagList || []).map(tag => {
-                        return (
-                          <span className="tag-default tag-pill" key={tag}>
-                            <i className="ion-close-round"
-                              onClick={this.removeTagHandler(tag)}>
-                            </i>
-                            {tag}
-                          </span>
-                        );
-                      })
-                    }
+                      {
+                        (this.props.tagList || []).map(tag => {
+                          return (
+                            <span className="tag-default tag-pill" key={tag}>
+                              <i  className="ion-close-round"
+                                  onClick={this.removeTagHandler(tag)}>
+                              </i>
+                              {tag}
+                            </span>
+                          );
+                        })
+                      }
                     </div>
                   </fieldset>
 
@@ -157,10 +153,12 @@ class Editor extends React.Component {
                     type="button"
                     disabled={this.props.inProgress}
                     onClick={this.submitForm}>
-                    Post Achievement
+                    Publish Article
                   </button>
+
                 </fieldset>
               </form>
+
             </div>
           </div>
         </div>

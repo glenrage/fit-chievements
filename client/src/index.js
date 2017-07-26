@@ -13,6 +13,7 @@ import ProfileFavorites from './components/ProfileFavorites';
 import Register from './components/Register';
 import Settings from './components/Settings';
 import store from './store';
+import './style/main.css'
 
 ReactDOM.render((
   <Provider store={store}>

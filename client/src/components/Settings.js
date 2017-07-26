@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import agent from '../agent';
 import { connect } from 'react-redux';
+import store from '../store';
 
 class SettingsForm extends React.Component {
   constructor() {
@@ -45,7 +46,6 @@ class SettingsForm extends React.Component {
     }
   }
 
-  //after first component mounts update new props
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser) {
       this.setState(Object.assign({}, this.state, {
@@ -127,13 +127,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClickLogout: () => dispatch ({ type: 'LOGOUT' }),
+  onClickLogout: () => dispatch({ type: 'LOGOUT' }),
   onSubmitForm: user =>
-    dispatch({ type: 'SETTINGS_SAVED', payload: agent.Auth.save(user) })
+    dispatch({ type: 'SETTINGS_SAVED', payload: agent.Auth.save(user) }),
+  onUnload: () => dispatch({ type: 'SETTINGS_PAGE_UNLOADED' })
 });
 
 class Settings extends React.Component {
-  render () {
+  render() {
     return (
       <div className="settings-page">
         <div className="container page">
@@ -160,9 +161,8 @@ class Settings extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

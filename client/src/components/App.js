@@ -37,12 +37,11 @@ class App extends React.Component {
 
   render() {
     if (this.props.appLoaded) {
-      return(
+      return (
         <div>
           <Header
             appName={this.props.appName}
-            currentUser={this.props.currentUser}
-          />
+            currentUser={this.props.currentUser} />
           {this.props.children}
         </div>
       );
@@ -50,8 +49,8 @@ class App extends React.Component {
     return (
       <div>
         <Header
-          currentUser={this.props.currentUser}
-          appName={this.props.appName} />
+          appName={this.props.appName}
+          currentUser={this.props.currentUser} />
       </div>
     );
   }
