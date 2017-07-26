@@ -1,5 +1,5 @@
 import Header from './Header';
-import Home from './Home';
+// import Home from './Home';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
