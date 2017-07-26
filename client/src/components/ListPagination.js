@@ -2,12 +2,12 @@ import React from 'react';
 import agent from '../agent';
 
 const ListPagination = props => {
-  if (props.articlesCount <= 10) {
+  if (props.achievementsCount <= 10) {
     return null;
   }
 
   const range = [];
-  for (let i = 0; i < Math.ceil(props.articlesCount / 10); ++i) {
+  for (let i = 0; i < Math.ceil(props.achievementsCount / 10); ++i) {
     range.push(i);
   }
 

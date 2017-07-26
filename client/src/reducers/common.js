@@ -1,5 +1,5 @@
 const defaultState = {
-  appName: 'Conduit',
+  appName: 'fit-chievements',
   token: null
 };
 
@@ -16,9 +16,9 @@ export default (state = defaultState, action) => {
       return { ...state, redirectTo: null };
     case 'LOGOUT':
       return { ...state, redirectTo: '/', token: null, currentUser: null };
-    case 'ARTICLE_SUBMITTED':
+    case 'ACHIEVEMENT_SUBMITTED':
       console.log(action.payload)
-      const redirectUrl = `article/${action.payload.article.slug}`;
+      const redirectUrl = `achievement/${action.payload.achievement.slug}`;
       return { ...state, redirectTo: redirectUrl };
     case 'SETTINGS_SAVED':
       return {
@@ -34,7 +34,7 @@ export default (state = defaultState, action) => {
         token: action.error ? null : action.payload.user.token,
         currentUser: action.error ? null : action.payload.user
       };
-    case 'DELETE_ARTICLE':
+    case 'DELETE_ACHIEVEMENT':
       return { ...state, redirectTo: '/' };
   }
   return state;

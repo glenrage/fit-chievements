@@ -1,7 +1,7 @@
 {
   "name": "fit-chievements",
   "version": "1.0.0",
-  "description": "Full Stack Application where Users can post their daily fitness articles",
+  "description": "Full Stack Application where Users can post their daily fitness achievements",
   "main": "app.js",
   "directories": {
     "test": "test"

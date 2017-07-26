@@ -30,30 +30,30 @@ const requests = {
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const encode = encodeURIComponent;
-const omitSlug = article => Object.assign({}, article, { slug: undefined });
-const Articles = {
+const omitSlug = achievement => Object.assign({}, achievement, { slug: undefined });
+const Achievements = {
   all: page =>
-    requests.get(`/articles?${limit(10, page)}`),
+    requests.get(`/achievements?${limit(10, page)}`),
   byAuthor: (author, page) =>
-    requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
+    requests.get(`/achievements?author=${encode(author)}&${limit(5, page)}`),
   byTag: (tag, page) =>
-    requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`),
+    requests.get(`/achievements?tag=${encode(tag)}&${limit(10, page)}`),
   del: slug =>
-    requests.del(`/articles/${slug}`),
+    requests.del(`/achievements/${slug}`),
   favorite: slug =>
-    requests.post(`/articles/${slug}/favorite`),
+    requests.post(`/achievements/${slug}/favorite`),
   favoritedBy: (author, page) =>
-    requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
+    requests.get(`/achievements?favorited=${encode(author)}&${limit(5, page)}`),
   unfavorite: slug =>
-    requests.del(`/articles/${slug}/favorite`),
+    requests.del(`/achievements/${slug}/favorite`),
   feed: () =>
-    requests.get('/articles/feed?limit=10&offset=0'),
+    requests.get('/achievements/feed?limit=10&offset=0'),
   get: slug =>
-    requests.get(`/articles/${slug}`),
-  update: article =>
-    requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
-  create: article =>
-    requests.post('/articles', { article })
+    requests.get(`/achievements/${slug}`),
+  update: achievement =>
+    requests.put(`/achievements/${achievement.slug}`, { achievement: omitSlug(achievement) }),
+  create: achievement =>
+    requests.post('/achievements', { achievement })
 };
 
 const Auth = {
@@ -69,11 +69,11 @@ const Auth = {
 
 const Comments = {
   create: (slug, comment) =>
-    requests.post(`/articles/${slug}/comments`, { comment }),
+    requests.post(`/achievements/${slug}/comments`, { comment }),
   delete: (slug, commentId) =>
-    requests.del(`/articles/${slug}/comments/${commentId}`),
-  forArticle: slug =>
-    requests.get(`/articles/${slug}/comments`)
+    requests.del(`/achievements/${slug}/comments/${commentId}`),
+  forAchievement: slug =>
+    requests.get(`/achievements/${slug}/comments`)
 };
 
 const Profile = {
@@ -90,7 +90,7 @@ const Tags = {
 };
 
 export default {
-  Articles,
+  Achievements,
   Auth,
   Comments,
   Profile,

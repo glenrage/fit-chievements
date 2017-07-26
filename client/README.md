@@ -913,7 +913,7 @@ These variables will act as the defaults if the machine does not explicitly set 
 Please refer to the [dotenv documentation](https://github.com/motdotla/dotenv) for more details.
 
 >Note: If you are defining environment variables for development, your CI and/or hosting platform will most likely need
-these defined as well. Consult their documentation how to do this. For example, see the documentation for [Travis CI](https://docs.travis-ci.com/user/environment-variables/) or [Heroku](https://devcenter.heroku.com/articles/config-vars).
+these defined as well. Consult their documentation how to do this. For example, see the documentation for [Travis CI](https://docs.travis-ci.com/user/environment-variables/) or [Heroku](https://devcenter.heroku.com/achievements/config-vars).
 
 ## Can I Use Decorators?
 
@@ -938,12 +938,12 @@ These tutorials will help you to integrate your app with an API backend running 
 using `fetch()` to access it.
 
 ### Node
-Check out [this tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/).
+Check out [this tutorial](https://www.fullstackreact.com/achievements/using-create-react-app-with-a-server/).
 You can find the companion GitHub repository [here](https://github.com/fullstackreact/food-lookup-demo).
 
 ### Ruby on Rails
 
-Check out [this tutorial](https://www.fullstackreact.com/articles/how-to-get-create-react-app-to-work-with-your-rails-api/).
+Check out [this tutorial](https://www.fullstackreact.com/achievements/how-to-get-create-react-app-to-work-with-your-rails-api/).
 You can find the companion GitHub repository [here](https://github.com/fullstackreact/food-lookup-demo-rails).
 
 ## Proxying API Requests in Development
@@ -986,7 +986,7 @@ If the `proxy` option is **not** flexible enough for you, alternatively you can:
 
 ### "Invalid Host Header" Errors After Configuring Proxy
 
-When you enable the `proxy` option, you opt into a more strict set of host checks. This is necessary because leaving the backend open to remote hosts makes your computer vulnerable to DNS rebinding attacks. The issue is explained in [this article](https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a) and [this issue](https://github.com/webpack/webpack-dev-server/issues/887).
+When you enable the `proxy` option, you opt into a more strict set of host checks. This is necessary because leaving the backend open to remote hosts makes your computer vulnerable to DNS rebinding attacks. The issue is explained in [this achievement](https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a) and [this issue](https://github.com/webpack/webpack-dev-server/issues/887).
 
 This shouldn’t affect you when developing on `localhost`, but if you develop remotely like [described here](https://github.com/facebookincubator/create-react-app/issues/2271), you will see this error in the browser after enabling the `proxy` option:
 
@@ -1387,7 +1387,7 @@ script:
 
 #### CircleCI
 
-Follow [this article](https://medium.com/@knowbody/circleci-and-zeits-now-sh-c9b7eebcd3c1) to set up CircleCI with a Create React App project.
+Follow [this achievement](https://medium.com/@knowbody/circleci-and-zeits-now-sh-c9b7eebcd3c1) to set up CircleCI with a Create React App project.
 
 ### On your own environment
 ##### Windows (cmd.exe)
@@ -2022,7 +2022,7 @@ When you build the project, Create React App will place the `public` folder cont
 
     Paste that URL into your browser when the build is complete, and you will see your deployed app.
 
-Details are available in [this article.](https://zeit.co/blog/unlimited-static)
+Details are available in [this achievement.](https://zeit.co/blog/unlimited-static)
 
 ### S3 and CloudFront
 

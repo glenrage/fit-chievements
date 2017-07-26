@@ -1,5 +1,5 @@
 
-import ArticleList from './ArticleList';
+import AchievementList from './AchievementList';
 import React from 'react';
 import { Link } from 'react-router';
 import agent from '../agent';
@@ -51,7 +51,7 @@ const FollowUserButton = props => {
 };
 
 const mapStateToProps = state => ({
-  ...state.articleList,
+  ...state.achievementList,
   currentUser: state.common.currentUser,
   profile: state.profile
 });
@@ -74,7 +74,7 @@ class Profile extends React.Component {
   componentWillMount() {
     this.props.onLoad(Promise.all([
       agent.Profile.get(this.props.params.username),
-      agent.Articles.byAuthor(this.props.params.username)
+      agent.Achievements.byAuthor(this.props.params.username)
     ]));
   }
 
@@ -89,7 +89,7 @@ class Profile extends React.Component {
           <Link
             className="nav-link active"
             to={`@${this.props.profile.username}`}>
-            My Articles
+            My Achievements
           </Link>
         </li>
 
@@ -97,7 +97,7 @@ class Profile extends React.Component {
           <Link
             className="nav-link"
             to={`@${this.props.profile.username}/favorites`}>
-            Favorited Articles
+            Favorited Achievements
           </Link>
         </li>
       </ul>
@@ -105,7 +105,7 @@ class Profile extends React.Component {
   }
 
   onSetPage(page) {
-    const promise = agent.Articles.byAuthor(this.props.profile.username, page);
+    const promise = agent.Achievements.byAuthor(this.props.profile.username, page);
     this.props.onSetPage(page, promise);
   }
 
@@ -150,13 +150,13 @@ class Profile extends React.Component {
 
             <div className="col-xs-12 col-md-10 offset-md-1">
 
-              <div className="articles-toggle">
+              <div className="achievements-toggle">
                 {this.renderTabs()}
               </div>
 
-              <ArticleList
-                articles={this.props.articles}
-                articlesCount={this.props.articlesCount}
+              <AchievementList
+                achievements={this.props.achievements}
+                achievementsCount={this.props.achievementsCount}
                 currentPage={this.props.currentPage}
                 onSetPage={onSetPage} />
             </div>

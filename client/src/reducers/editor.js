@@ -3,23 +3,23 @@ export default (state = {}, action) => {
     case 'EDITOR_PAGE_LOADED':
       return {
         ...state,
-        articleSlug: action.payload ? action.payload.article.slug : '',
-        title: action.payload ? action.payload.article.title : '',
-        description: action.payload ? action.payload.article.description : '',
-        body: action.payload ? action.payload.article.body : '',
+        achievementSlug: action.payload ? action.payload.achievement.slug : '',
+        title: action.payload ? action.payload.achievement.title : '',
+        description: action.payload ? action.payload.achievement.description : '',
+        body: action.payload ? action.payload.achievement.body : '',
         tagInput: '',
-        tagList: action.payload ? action.payload.article.tagList : []
+        tagList: action.payload ? action.payload.achievement.tagList : []
       };
     case 'EDITOR_PAGE_UNLOADED':
       return {};
-    case 'ARTICLE_SUBMITTED':
+    case 'ACHIEVEMENT_SUBMITTED':
       return {
         ...state,
         inProgress: null,
         errors: action.error ? action.payload.errors : null
       };
     case 'ASYNC_START':
-      if (action.subtype === 'ARTICLE_SUBMITTED') {
+      if (action.subtype === 'ACHIEVEMENT_SUBMITTED') {
         return { ...state, inProgress: true };
       }
       break;

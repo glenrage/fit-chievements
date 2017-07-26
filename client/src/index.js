@@ -4,7 +4,7 @@ import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import App from './components/App';
-import Article from './components/Article';
+import Achievement from './components/Achievement';
 import Editor from './components/Editor';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -23,7 +23,7 @@ ReactDOM.render((
         <Route path="login" component={Login} />
         <Route path="register" component={Register} />
         <Route path="settings" component={Settings} />
-        <Route path="article/:id" component={Article} />
+        <Route path="achievement/:id" component={Achievement} />
         <Route path="@:username" component={Profile} />
         <Route path="@:username/favorites" component={ProfileFavorites} />
         <Route path="editor" component={Editor} />

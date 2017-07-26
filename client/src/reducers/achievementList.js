@@ -2,11 +2,10 @@ export default (state = {}, action) => {
   switch (action.type) {
 
     case 'HOME_PAGE_LOADED':
-      console.log('here')
       return {
         ...state,
-        articles: action.payload[1].articles,
-        articlesCount: action.payload[1].articlesCount,
+        achievements: action.payload[1].achievements,
+        achievementsCount: action.payload[1].achievementsCount,
         tab: action.tab,
         currentPage: 0
       };
@@ -15,8 +14,8 @@ export default (state = {}, action) => {
     case 'CHANGE_TAB':
       return {
         ...state,
-        articles: action.payload.articles,
-        articlesCount: action.payload.articlesCount,
+        achievements: action.payload.achievements,
+        achievementsCount: action.payload.achievementsCount,
         tab: action.tab,
         tag: null,
         currentPage: 0
@@ -24,15 +23,15 @@ export default (state = {}, action) => {
     case 'SET_PAGE':
       return {
         ...state,
-        articles: action.payload.articles,
-        articlesCount: action.payload.articlesCount,
+        achievements: action.payload.achievements,
+        achievementsCount: action.payload.achievementsCount,
         currentPage: action.page
       };
     case 'APPLY_TAG_FILTER':
       return {
         ...state,
-        articles: action.payload.articles,
-        articlesCount: action.payload.articlesCount,
+        achievements: action.payload.achievements,
+        achievementsCount: action.payload.achievementsCount,
         tab: null,
         tag: action.tag,
         currentPage: 0
@@ -41,26 +40,26 @@ export default (state = {}, action) => {
     case 'PROFILE_FAVORITES_PAGE_LOADED':
       return {
         ...state,
-        articles: action.payload[1].articles,
-        articlesCount: action.payload[1].articlesCount,
+        achievements: action.payload[1].achievements,
+        achievementsCount: action.payload[1].achievementsCount,
         currentPage: 0
       };
     case 'PROFILE_PAGE_UNLOADED':
     case 'PROFILE_FAVORITES_PAGE_UNLOADED':
       return {};
-    case 'ARTICLE_FAVORITED':
-    case 'ARTICLE_UNFAVORITED':
+    case 'ACHIEVEMENT_FAVORITED':
+    case 'ACHIEVEMENT_UNFAVORITED':
       return {
         ...state,
-        articles: state.articles.map(article => {
-          if (article.slug === action.payload.article.slug) {
+        achievements: state.achievements.map(achievement => {
+          if (achievement.slug === action.payload.achievement.slug) {
             return {
-              ...article,
+              ...achievement,
               favorited: action.payload.favorited,
-              favoritesCount: action.payload.article.favoritesCount
+              favoritesCount: action.payload.achievement.favoritesCount
             };
           }
-          return article;
+          return achievement;
         })
       };
   }

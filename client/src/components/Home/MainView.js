@@ -1,4 +1,4 @@
-import ArticleList from '../ArticleList';
+import AchievementList from '../AchievementList';
 import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ const YourFeedTab = props => {
   if (props.token) {
     const clickHandler = ev => {
       ev.preventDefault();
-      props.onTabClick('feed', agent.Articles.feed());
+      props.onTabClick('feed', agent.Achievements.feed());
     }
 
     return (
@@ -26,7 +26,7 @@ const YourFeedTab = props => {
 const GlobalFeedTab = props => {
   const clickHandler = ev => {
     ev.preventDefault();
-    props.onTabClick('all', agent.Articles.all());
+    props.onTabClick('all', agent.Achievements.all());
   };
   return (
     <li className="nav-item">
@@ -55,7 +55,7 @@ const TagFilterTab = props => {
 };
 
 const mapStateToProps = state => ({
-  ...state.articleList,
+  ...state.achievementList,
   token: state.common.token
 });
 
@@ -63,7 +63,7 @@ const mapDispatchToProps = dispatch => ({
   onSetPage: (tab, p) => dispatch({
     type: 'SET_PAGE',
     page: p,
-    payload: tab === 'feed' ? agent.Articles.feed(p) : agent.Articles.all(p)
+    payload: tab === 'feed' ? agent.Achievements.feed(p) : agent.Achievements.all(p)
   }),
   onTabClick: (tab, payload) => dispatch({ type: 'CHANGE_TAB', tab, payload })
 });
@@ -87,9 +87,9 @@ const MainView = props => {
         </ul>
       </div>
 
-      <ArticleList
-        articles={props.articles}
-        articlesCount={props.articlesCount}
+      <AchievementList
+        achievements={props.achievements}
+        achievementsCount={props.achievementsCount}
         currentPage={props.currentPage}
         onSetPage={onSetPage} />
     </div>

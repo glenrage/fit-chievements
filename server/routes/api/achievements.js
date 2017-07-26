@@ -2,19 +2,19 @@
 
 const router = require('express').Router();
 const mongoose = require('mongoose');
-const Article = mongoose.model('Article');
+const Achievement = mongoose.model('Achievement');
 const Comment = mongoose.model('Comment');
 const User = mongoose.model('User');
 const auth = require('../auth');
 
-// Preload article objects on routes with ':article'
-router.param('article', function(req, res, next, slug) {
-  Article.findOne({ slug: slug})
+// Preload achievement objects on routes with ':achievement'
+router.param('achievement', function(req, res, next, slug) {
+  Achievement.findOne({ slug: slug})
     .populate('author')
-    .then(function (article) {
-      if (!article) { return res.sendStatus(404); }
+    .then(function (achievement) {
+      if (!achievement) { return res.sendStatus(404); }
 
-      req.article = article;
+      req.achievement = achievement;
 
       return next();
     }).catch(next);
@@ -65,24 +65,24 @@ router.get('/', auth.optional, function(req, res, next) {
     }
 
     return Promise.all([
-      Article.find(query)
+      Achievement.find(query)
         .limit(Number(limit))
         .skip(Number(offset))
         .sort({createdAt: 'desc'})
         .populate('author')
         .exec(),
-      Article.count(query).exec(),
+      Achievement.count(query).exec(),
       req.payload ? User.findById(req.payload.id) : null,
     ]).then(function(results){
-      var articles = results[0];
-      var articlesCount = results[1];
+      var achievements = results[0];
+      var achievementsCount = results[1];
       var user = results[2];
 
       return res.json({
-        articles: articles.map(function(article){
-          return article.toJSONFor(user);
+        achievements: achievements.map(function(achievement){
+          return achievement.toJSONFor(user);
         }),
-        articlesCount: articlesCount
+        achievementsCount: achievementsCount
       });
     });
   }).catch(next);
@@ -104,21 +104,21 @@ router.get('/feed', auth.required, function(req, res, next) {
     if (!user) { return res.sendStatus(401); }
 
     Promise.all([
-      Article.find({ author: {$in: user.following}})
+      Achievement.find({ author: {$in: user.following}})
         .limit(Number(limit))
         .skip(Number(offset))
         .populate('author')
         .exec(),
-      Article.count({ author: {$in: user.following}})
+      Achievement.count({ author: {$in: user.following}})
     ]).then(function(results){
-      var articles = results[0];
-      var articlesCount = results[1];
+      var achievements = results[0];
+      var achievementsCount = results[1];
 
       return res.json({
-        articles: articles.map(function(article){
-          return article.toJSONFor(user);
+        achievements: achievements.map(function(achievement){
+          return achievement.toJSONFor(user);
         }),
-        articlesCount: articlesCount
+        achievementsCount: achievementsCount
       });
     }).catch(next);
   });
@@ -128,51 +128,51 @@ router.post('/', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
     if (!user) { return res.sendStatus(401); }
 
-    var article = new Article(req.body.article);
+    var achievement = new Achievement(req.body.achievement);
 
-    article.author = user;
+    achievement.author = user;
 
-    return article.save().then(function(){
-      console.log(article.author);
-      return res.json({article: article.toJSONFor(user)});
+    return achievement.save().then(function(){
+      console.log(achievement.author);
+      return res.json({achievement: achievement.toJSONFor(user)});
     });
   }).catch(next);
 });
 
-// return a article
-router.get('/:article', auth.optional, function(req, res, next) {
+// return a achievement
+router.get('/:achievement', auth.optional, function(req, res, next) {
   Promise.all([
     req.payload ? User.findById(req.payload.id) : null,
-    req.article.populate('author').execPopulate()
+    req.achievement.populate('author').execPopulate()
   ]).then(function(results){
     var user = results[0];
 
-    return res.json({article: req.article.toJSONFor(user)});
+    return res.json({achievement: req.achievement.toJSONFor(user)});
   }).catch(next);
 });
 
-// update article
-router.put('/:article', auth.required, function(req, res, next) {
+// update achievement
+router.put('/:achievement', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
-    if(req.article.author._id.toString() === req.payload.id.toString()){
-      if(typeof req.body.article.title !== 'undefined'){
-        req.article.title = req.body.article.title;
+    if(req.achievement.author._id.toString() === req.payload.id.toString()){
+      if(typeof req.body.achievement.title !== 'undefined'){
+        req.achievement.title = req.body.achievement.title;
       }
 
-      if(typeof req.body.article.description !== 'undefined'){
-        req.article.description = req.body.article.description;
+      if(typeof req.body.achievement.description !== 'undefined'){
+        req.achievement.description = req.body.achievement.description;
       }
 
-      if(typeof req.body.article.body !== 'undefined'){
-        req.article.body = req.body.article.body;
+      if(typeof req.body.achievement.body !== 'undefined'){
+        req.achievement.body = req.body.achievement.body;
       }
 
-      if(typeof req.body.article.tagList !== 'undefined'){
-        req.article.tagList = req.body.article.tagList
+      if(typeof req.body.achievement.tagList !== 'undefined'){
+        req.achievement.tagList = req.body.achievement.tagList
       }
 
-      req.article.save().then(function(article){
-        return res.json({article: article.toJSONFor(user)});
+      req.achievement.save().then(function(achievement){
+        return res.json({achievement: achievement.toJSONFor(user)});
       }).catch(next);
     } else {
       return res.sendStatus(403);
@@ -180,13 +180,13 @@ router.put('/:article', auth.required, function(req, res, next) {
   });
 });
 
-// delete article
-router.delete('/:article', auth.required, function(req, res, next) {
+// delete achievement
+router.delete('/:achievement', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
     if (!user) { return res.sendStatus(401); }
 
-    if(req.article.author._id.toString() === req.payload.id.toString()){
-      return req.article.remove().then(function(){
+    if(req.achievement.author._id.toString() === req.payload.id.toString()){
+      return req.achievement.remove().then(function(){
         return res.sendStatus(204);
       });
     } else {
@@ -195,40 +195,40 @@ router.delete('/:article', auth.required, function(req, res, next) {
   }).catch(next);
 });
 
-// Favorite an article
-router.post('/:article/favorite', auth.required, function(req, res, next) {
-  var articleId = req.article._id;
+// Favorite an achievement
+router.post('/:achievement/favorite', auth.required, function(req, res, next) {
+  var achievementId = req.achievement._id;
 
   User.findById(req.payload.id).then(function(user){
     if (!user) { return res.sendStatus(401); }
 
-    return user.favorite(articleId).then(function(){
-      return req.article.updateFavoriteCount().then(function(article){
-        return res.json({article: article.toJSONFor(user)});
+    return user.favorite(achievementId).then(function(){
+      return req.achievement.updateFavoriteCount().then(function(achievement){
+        return res.json({achievement: achievement.toJSONFor(user)});
       });
     });
   }).catch(next);
 });
 
-// Unfavorite an article
-router.delete('/:article/favorite', auth.required, function(req, res, next) {
-  var articleId = req.article._id;
+// Unfavorite an achievement
+router.delete('/:achievement/favorite', auth.required, function(req, res, next) {
+  var achievementId = req.achievement._id;
 
   User.findById(req.payload.id).then(function (user){
     if (!user) { return res.sendStatus(401); }
 
-    return user.unfavorite(articleId).then(function(){
-      return req.article.updateFavoriteCount().then(function(article){
-        return res.json({article: article.toJSONFor(user)});
+    return user.unfavorite(achievementId).then(function(){
+      return req.achievement.updateFavoriteCount().then(function(achievement){
+        return res.json({achievement: achievement.toJSONFor(user)});
       });
     });
   }).catch(next);
 });
 
-// return an article's comments
-router.get('/:article/comments', auth.optional, function(req, res, next){
+// return an achievement's comments
+router.get('/:achievement/comments', auth.optional, function(req, res, next){
   Promise.resolve(req.payload ? User.findById(req.payload.id) : null).then(function(user){
-    return req.article.populate({
+    return req.achievement.populate({
       path: 'comments',
       populate: {
         path: 'author'
@@ -238,8 +238,8 @@ router.get('/:article/comments', auth.optional, function(req, res, next){
           createdAt: 'desc'
         }
       }
-    }).execPopulate().then(function(article) {
-      return res.json({comments: req.article.comments.map(function(comment){
+    }).execPopulate().then(function(achievement) {
+      return res.json({comments: req.achievement.comments.map(function(comment){
         return comment.toJSONFor(user);
       })});
     });
@@ -247,28 +247,28 @@ router.get('/:article/comments', auth.optional, function(req, res, next){
 });
 
 // create a new comment
-router.post('/:article/comments', auth.required, function(req, res, next) {
+router.post('/:achievement/comments', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(function(user){
     if(!user){ return res.sendStatus(401); }
 
     var comment = new Comment(req.body.comment);
-    comment.article = req.article;
+    comment.achievement = req.achievement;
     comment.author = user;
 
     return comment.save().then(function(){
-      req.article.comments.push(comment);
+      req.achievement.comments.push(comment);
 
-      return req.article.save().then(function(article) {
+      return req.achievement.save().then(function(achievement) {
         res.json({comment: comment.toJSONFor(user)});
       });
     });
   }).catch(next);
 });
 
-router.delete('/:article/comments/:comment', auth.required, function(req, res, next) {
+router.delete('/:achievement/comments/:comment', auth.required, function(req, res, next) {
   if(req.comment.author.toString() === req.payload.id.toString()){
-    req.article.comments.remove(req.comment._id);
-    req.article.save()
+    req.achievement.comments.remove(req.comment._id);
+    req.achievement.save()
       .then(Comment.find({_id: req.comment._id}).remove().exec())
       .then(function(){
         res.sendStatus(204);
