@@ -1,9 +1,9 @@
-import AchievementList from '../AchievementList';
+import ArticleList from '../ArticleList';
 import React from 'react';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
-  achievements: state.home.achievements
+  ...state.articleList 
 })
 
 const MainView = props => {
@@ -20,8 +20,8 @@ const MainView = props => {
           </li>
         </ul>
       </div>
-      <AchievementList
-        achievements={props.achievements}
+      <ArticleList
+        articles={props.articles}
       />
     </div>
   );

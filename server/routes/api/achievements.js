@@ -2,24 +2,25 @@
 
 const router = require('express').Router();
 const mongoose = require('mongoose');
-const Achievement = mongoose.model('Achievement');
+const Article = mongoose.model('Article');
 const Comment = mongoose.model('Comment');
 const User = mongoose.model('User');
 const auth = require('../auth');
 
-//Preload achievement objects on routes with ':achievement'
+//Preload article objects on routes with ':article'
 
-router.param('achievement', function(req, res, next, slug) {
-  Achievement.findOne({slug: slug})
+router.param('article', function(req, res, next, slug) {
+  Article.findOne({slug: slug})
     .populate('author')
-    .then(achievement => {
-      if (!achievement) { return res.sendStatus(404); }
+    .then(article => {
+      if (!article) { return res.sendStatus(404); }
 
-      req.achievement = achievement;
+      req.article = article;
 
       return next();
     }).catch(next);
 });
+
 
 router.param('comment', function(req, res, next, id) {
   Comment.findById(id).then(comment => {
@@ -66,24 +67,24 @@ router.get('/', auth.optional, function(req, res, next) {
     }
 
     return Promise.all([
-      Achievement.find(query)
+      Article.find(query)
       .limit(Number(limit))
       .skip(Number(offset))
       .sort({createdAt: 'desc'})
       .populate('author')
       .exec(),
-      Achievement.count(query).exec(),
+      Article.count(query).exec(),
       req.payload ? User.findById(req.payload.id) : null,
     ]).then(results => {
-      let achievements = results[0];
-      let achievementsCount = results[1];
+      let articles = results[0];
+      let articlesCount = results[1];
       let user = results[2];
 
       return res.json({
-        achievements: achievements.map(achievement => {
-          return achievement.toJSONFor(user);
+        articles: articles.map(article => {
+          return article.toJSONFor(user);
         }),
-          achievementsCount: achievementsCount
+          articlesCount: articlesCount
       });
     });
   }).catch(next);
@@ -105,21 +106,21 @@ router.get('/feed', auth.required, function(req, res, next) {
     if (!user) { return res.sendStatus(401); }
 
     Promise.all([
-      Achievement.find({ author: {$in: user.following}})
+      Article.find({ author: {$in: user.following}})
       .limit(Number(limit))
       .skip(Number(offset))
       .populate('author')
       .exec(),
-      Achievement.count({ author: {$in: user.following}})
+      Article.count({ author: {$in: user.following}})
     ]).then(results => {
-        let achievements = results[0];
-        let achievementsCount = results[0];
+        let articles = results[0];
+        let articlesCount = results[0];
 
         return res.json({
-          achievements: achievements.map(achievement => {
-            return achievement.toJSONFor(user);
+          articles: articles.map(article => {
+            return article.toJSONFor(user);
           }),
-          achievementsCount : achievementsCount
+          articlesCount : articlesCount
         });
     }).catch(next);
   });
@@ -129,47 +130,47 @@ router.post('/', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(user => {
     if (!user) { return res.sendStatus(401); }
 
-    let achievement = new Achievement(req.body.achievement);
+    let article = new Article(req.body.article);
 
-    achievement.author = user;
+    article.author = user;
 
-    return achievement.save().then(() => {
-      console.log('achievement author ' + achievement.author);
-      return res.json({achievement : achievement.toJSONFor(user)});
+    return article.save().then(() => {
+      console.log('article author ' + article.author);
+      return res.json({article : article.toJSONFor(user)});
     });
   }).catch(next);
 })
 
-//return an achievement
-router.get('/:achievement', auth.optional, function(req, res, next) {
+//return an article
+router.get('/:article', auth.optional, function(req, res, next) {
   Promise.all([
     req.payload ? User.findById(req.payload.id) : null,
-    req.achievement.populate('author').execPopulate()
+    req.article.populate('author').execPopulate()
   ]).then(results => {
     let user = results[0];
 
-    return res.json({achievement: req.achievement.toJSONFor(user)});
+    return res.json({article: req.article.toJSONFor(user)});
   }).catch(next);
 });
 
-//update achievement
-router.put('/:achievement', auth.required, function(req, res, next) {
+//update article
+router.put('/:article', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(user => {
-    if(req.achievement.author._id.toString() === req.payload.id.toString()) {
-      if(typeof req.body.achievement.title !== 'undefined') {
-        req.achievement.title = req.body.achievement.title;
+    if(req.article.author._id.toString() === req.payload.id.toString()) {
+      if(typeof req.body.article.title !== 'undefined') {
+        req.article.title = req.body.article.title;
       }
 
-      if(typeof req.body.achievement.description !== 'undefined') {
-        req.achievement.description = req.body.achievement.description;
+      if(typeof req.body.article.description !== 'undefined') {
+        req.article.description = req.body.article.description;
       }
 
-      if(typeof req.body.achievement.tagList !== 'undefined') {
-        req.achievement.tagList = req.body.achievement.tagList
+      if(typeof req.body.article.tagList !== 'undefined') {
+        req.article.tagList = req.body.article.tagList
       }
 
-      req.achievement.save().then(achievement => {
-        return res.json({achievement: achievement.toJSONFor(user)});
+      req.article.save().then(article => {
+        return res.json({article: article.toJSONFor(user)});
       }).catch(next);
     } else {
       return res.sendStatus(403);
@@ -177,13 +178,13 @@ router.put('/:achievement', auth.required, function(req, res, next) {
   });
 });
 
-//delete achievement
-router.delete('/:achievement', auth.required, function(req, res, next) {
+//delete article
+router.delete('/:article', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(user => {
     if (!user) { return res.sendStatus(401); }
 
-    if (req.achievement.author._id.toString() === req.payload.id.toString()) {
-      return req.achievement.remove().then(() => {
+    if (req.article.author._id.toString() === req.payload.id.toString()) {
+      return req.article.remove().then(() => {
         return res.sendStatus(204);
       });
     } else {
@@ -192,40 +193,40 @@ router.delete('/:achievement', auth.required, function(req, res, next) {
   }).catch(next);
 });
 
-//like an achievement
-router.post('/:achievement/like', auth.required, function(req, res, next) {
-  let achievementId = req.achievement._id;
+//like an article
+router.post('/:article/like', auth.required, function(req, res, next) {
+  let articleId = req.article._id;
 
   User.findById(req.payload.id).then(function(user) {
     if (!user) { return res.sendStatus(401); }
 
-    return user.like(achievementId).then(() => {
-      return req.achievement.updateLikeCount().then(achievement => {
-        return res.json({achievement: achievement.toJSONFor(user)});
+    return user.like(articleId).then(() => {
+      return req.article.updateLikeCount().then(article => {
+        return res.json({article: article.toJSONFor(user)});
       });
     });
   }).catch(next);
 });
 
-//unlike an achievement
-router.delete('/:achievement/like', auth.required, function(req, res, next) {
-  let achievementId = req.achievement._id;
+//unlike an article
+router.delete('/:article/like', auth.required, function(req, res, next) {
+  let articleId = req.article._id;
 
   User.findById(req.payload.id).then(user => {
     if (!user) { return res.sendStatus(401); }
 
-    return user.unlike(achievementId).then(() => {
-      return req.achievement.updateLikeCount().then(achievement => {
-        return res.json({achievement: achievement.toJSONFor(user)});
+    return user.unlike(articleId).then(() => {
+      return req.article.updateLikeCount().then(article => {
+        return res.json({article: article.toJSONFor(user)});
       });
     });
   }).catch(next);
 });
 
-//return an achievements comments
-router.get('/:achievement/comments', auth.optional, function(req, res, next) {
+//return an articles comments
+router.get('/:article/comments', auth.optional, function(req, res, next) {
   Promise.resolve(req.payload ? User.findById(req.payload.id) : null).then(user => {
-    return req.achievement.populate({
+    return req.article.populate({
       path: 'comments',
       populate: {
         path: 'author'
@@ -235,8 +236,8 @@ router.get('/:achievement/comments', auth.optional, function(req, res, next) {
           createdAt: 'desc'
         }
       }
-    }).execPoulate().then(achievement => {
-      return res.json({comments: req.achievement.comments.map(comment => {
+    }).execPoulate().then(article => {
+      return res.json({comments: req.article.comments.map(comment => {
         return comment.toJSONFor(user);
       })});
     });
@@ -244,18 +245,18 @@ router.get('/:achievement/comments', auth.optional, function(req, res, next) {
 });
 
 //create a new comment
-router.post('/:achievement/comments', auth.required, function(req, res, next) {
+router.post('/:article/comments', auth.required, function(req, res, next) {
   User.findById(req.payload.id).then(user => {
     if(!user) { return res.sendStatus(401); }
 
     let comment = new Comment(req.body.comment);
-    comment.achievement = req.achievement;
+    comment.article = req.article;
     comment.author = user;
 
     return comment.save().then(() => {
-      req.achievement.comments.push(comment);
+      req.article.comments.push(comment);
 
-        return req.achievement.save().then(achievement => {
+        return req.article.save().then(article => {
           res.json({comment: comment.toJSONFor(user)});
         });
     });
@@ -263,10 +264,10 @@ router.post('/:achievement/comments', auth.required, function(req, res, next) {
 })
 
 //delete a comment
-router.delete('/:achievement/comments/:comment', auth.required, function(req, res, next) {
+router.delete('/:article/comments/:comment', auth.required, function(req, res, next) {
   if(req.comment.author.toString() === req.payload.id.toString()) {
-    req.achievement.comments.remove(req.comment._id);
-    req.achievement.save()
+    req.article.comments.remove(req.comment._id);
+    req.article.save()
       .then(Comment.find({_id: req.comment._id}).remove().exec())
       .then(() => {
         res.sendStatus(204);

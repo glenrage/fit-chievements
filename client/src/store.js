@@ -1,16 +1,18 @@
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { promiseMiddleware } from './middleware';
 import auth from './reducers/auth';
+import article from './reducers/article';
 import common from './reducers/common';
 import home from './reducers/home';
+import settings from './reducers/settings';
 
 const defaultState = {
   appName: 'Fit-Goals',
-  achievements: null
+  articles: null
  };
 
 const reducer = combineReducers({
-  auth, common, home
+  auth, article, common, home, settings
 });
 
 const middleware = applyMiddleware(promiseMiddleware);

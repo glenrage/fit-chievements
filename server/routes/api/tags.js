@@ -2,11 +2,11 @@
 
 const router = require('express').Router();
 const mongoose = require('mongoose');
-const Achievement = mongoose.model('Achievement');
+const article = mongoose.model('article');
 
 //return a list of tags
 router.get('/', function(req, res, next) {
-  Achievement.find().distinct('tagList').then(tags => {
+  article.find().distinct('tagList').then(tags => {
     return res.json({ tags: tags});
   }).catch(next);
 });
