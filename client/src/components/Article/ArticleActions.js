@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router';
 import React from 'react';
 import agent from '../../agent';
@@ -14,7 +13,7 @@ const ArticleActions = props => {
   const del = () => {
     props.onClickDelete(agent.Articles.del(article.slug))
   };
-
+  
   if (props.canModify) {
     return (
       <span>
@@ -26,10 +25,11 @@ const ArticleActions = props => {
         </Link>
 
         <button className="btn btn-outline-danger btn-sm" onClick={del}>
-          <i className="ion-trash-a"></i>Delete Achievement
+          <i className="ion-trash-a"></i> Delete Article
         </button>
+
       </span>
-    ); 
+    );
   }
 
   return (

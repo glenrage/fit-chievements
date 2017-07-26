@@ -4,6 +4,7 @@ import auth from './reducers/auth';
 import article from './reducers/article';
 import common from './reducers/common';
 import home from './reducers/home';
+import profile from './reducers/profile';
 import settings from './reducers/settings';
 
 const defaultState = {
@@ -12,7 +13,7 @@ const defaultState = {
  };
 
 const reducer = combineReducers({
-  auth, article, common, home, settings
+  auth, article, common, home, profile, settings
 });
 
 const middleware = applyMiddleware(promiseMiddleware);
