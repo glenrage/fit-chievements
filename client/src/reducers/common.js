@@ -13,8 +13,7 @@ export default (state = defaultState, action) => {
         currentUser: action.payload ? action.payload.user : null
       };
     case 'REDIRECT':
-      return { ...state, redirectTo: null};
-
+      return { ...state, redirectTo: null };
     case 'LOGOUT':
       return { ...state, redirectTo: '/', token: null, currentUser: null };
     case 'SETTINGS_SAVED':
@@ -23,17 +22,16 @@ export default (state = defaultState, action) => {
         redirectTo: action.error ? null : '/',
         currentUser: action.error ? null : action.payload.user
       };
-    case 'LOGIN' :
-    case 'REGISTER' :
+    case 'LOGIN':
+    case 'REGISTER':
       return {
         ...state,
         redirectTo: action.error ? null : '/',
         token: action.error ? null : action.payload.user.token,
         currentUser: action.error ? null : action.payload.user
       };
-    case 'DELETE_ARTICLE' :
-      return {...state, redirectTo: '/'};
+    case 'DELETE_ARTICLE':
+      return { ...state, redirectTo: '/' };
   }
-
   return state;
 };

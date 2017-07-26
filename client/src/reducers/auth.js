@@ -1,22 +1,22 @@
 export default (state = {}, action) => {
   switch (action.type) {
-    case 'LOGIN' :
-    case 'REGISTER' :
+    case 'LOGIN':
+    case 'REGISTER':
       return {
         ...state,
         inProgress: false,
         errors: action.error ? action.payload.errors : null
       };
-    case 'LOGIN_PAGE_UNLOADED':   //when login and register unloads, return empty object to clear state
-    case 'REGISTER_PAGE_UNLOADED' :
-      return {}
-    case 'ASYNC_START' :
+    case 'LOGIN_PAGE_UNLOADED':
+    case 'REGISTER_PAGE_UNLOADED':
+      return {};
+    case 'ASYNC_START':
       if (action.subtype === 'LOGIN' || action.subtype === 'REGISTER') {
-        return {...state, inProgress: true };
+        return { ...state, inProgress: true };
       }
       break;
-    case 'UPDATE_FIELD_AUTH' :
-      return {...state, [action.key]: action.value };
+    case 'UPDATE_FIELD_AUTH':
+      return { ...state, [action.key]: action.value };
   }
 
   return state;
