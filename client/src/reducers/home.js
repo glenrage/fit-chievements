@@ -3,7 +3,7 @@ export default (state = {}, action) => {
     case 'HOME_PAGE_LOADED':
       return {
         ...state,
-        achievements: action.payload.achievements
+        articles: action.payload.articles
       };
   }
 

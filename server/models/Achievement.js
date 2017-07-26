@@ -5,7 +5,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 const slug = require('slug');
 const User = mongoose.model('User');
 
-const AchievementSchema = new mongoose.Schema({
+const articleSchema = new mongoose.Schema({
   slug: {type: String, lowercase: true, unique: true},
   title: String,
   description: String,
@@ -15,9 +15,9 @@ const AchievementSchema = new mongoose.Schema({
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 }, {timestamps: true});
 
-AchievementSchema.plugin(uniqueValidator, {message: 'is aready taken'});
+articleSchema.plugin(uniqueValidator, {message: 'is aready taken'});
 
-AchievementSchema.pre('validate', function(next) {
+articleSchema.pre('validate', function(next) {
   if(!this.slug) {
     this.slugify();
   }
@@ -25,21 +25,21 @@ AchievementSchema.pre('validate', function(next) {
   next();
 })
 
-AchievementSchema.methods.slugify = function() {
+articleSchema.methods.slugify = function() {
   this.slug = slug(this.title) + '-' + (Math.random() * Math.pow(36, 6) | 0).toString(36);
 };
 
-AchievementSchema.methods.updateLikesCount = function() {
-  let achievement = this
+articleSchema.methods.updateLikesCount = function() {
+  let article = this
 
-  return User.count({likes: {$in: [achievement._id]}}).then(function(count) {
-    achievement.likesCount = count;
+  return User.count({likes: {$in: [article._id]}}).then(function(count) {
+    article.likesCount = count;
 
-    return achievement.save();
+    return article.save();
   });
 };
 
-AchievementSchema.methods.toJSONFor = function(user) {
+articleSchema.methods.toJSONFor = function(user) {
   return {
     slug: this.slug,
     title: this.title,
@@ -53,4 +53,4 @@ AchievementSchema.methods.toJSONFor = function(user) {
   };
 };
 
-mongoose.model('Achievement', AchievementSchema);
+mongoose.model('article', articleSchema);

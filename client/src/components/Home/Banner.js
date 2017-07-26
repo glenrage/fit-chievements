@@ -7,7 +7,7 @@ const Banner = ({ appName }) => {
         <h1 className="logo-font">
           {appName}
         </h1>
-        <p>A place to share Fitness Achievements</p>
+        <p>A place to share Fitness articles</p>
       </div>
     </div>
   )

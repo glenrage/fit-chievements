@@ -3,7 +3,8 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = "http://localhost:3000/api";
+// const API_ROOT = "http://localhost:3000/api";
+const API_ROOT = " https://conduit.productionready.io/api";
 
 const responseBody = res => res.body;
 
@@ -15,10 +16,11 @@ const requests = {
 
 };
 
-
-const Achievements = {
+const articles = {
   all: page =>
-    requests.get(`/achievements?limit=10`)
+    requests.get(`/articles?limit=10`),
+  get: slug =>
+    requests.get(`/articles/${slug}`)
 };
 
 const Auth = {
@@ -32,6 +34,11 @@ const Auth = {
     requests.put('/user', { user })
 }
 
+const Comments = {
+  forarticle: slug =>
+    requests.get(`/articles/${slug}/comments`)
+}
+
 let token = null;
 let tokenPlugin = req => {
   if (token) {
@@ -40,7 +47,8 @@ let tokenPlugin = req => {
 }
 
 export default {
-  Achievements,
+  articles,
   Auth,
+  Comments,
   setToken: _token => { token = _token; }
 };

@@ -42,7 +42,7 @@ if(isProduction){
 }
 
 require('./models/User');
-require('./models/Achievement');
+require('./models/article');
 require('./models/Comment');
 require('./config/passport');
 
