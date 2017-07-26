@@ -1,5 +1,6 @@
 'use strict';
 
+import ListPagination from './ListPagination';
 import ArticlePreview from './ArticlePreview';
 import React from 'react';
 
@@ -27,6 +28,11 @@ const ArticleList = props => {
           );
         })
       }
+
+      <ListPagination
+        articlesCount={props.articlesCount}
+        currentPage={props.currentPage}
+        onSetPage={props.onSetPage} />
     </div>
   );
 };
