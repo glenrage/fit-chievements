@@ -1,5 +1,3 @@
-'use strict';
-
 import ArticleMeta from './ArticleMeta';
 import CommentContainer from './CommentContainer';
 import { Link } from 'react-router';

@@ -1,4 +1,3 @@
-'use strict';
 
 import ArticleList from './ArticleList';
 import React from 'react';

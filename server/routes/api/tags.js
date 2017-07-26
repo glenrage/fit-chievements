@@ -2,12 +2,12 @@
 
 const router = require('express').Router();
 const mongoose = require('mongoose');
-const article = mongoose.model('article');
+const Article = mongoose.model('Article');
 
 //return a list of tags
 router.get('/', function(req, res, next) {
-  article.find().distinct('tagList').then(tags => {
-    return res.json({ tags: tags});
+  Article.find().distinct('tagList').then(function(tags){
+    return res.json({tags: tags});
   }).catch(next);
 });
 

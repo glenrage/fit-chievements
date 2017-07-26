@@ -1,4 +1,3 @@
-'use strict';
 
 import { Link } from 'react-router';
 import React from 'react';
