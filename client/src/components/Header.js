@@ -1,5 +1,7 @@
-import React from 'react';
+'use strict';
+
 import { Link } from 'react-router';
+import React from 'react';
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
@@ -8,26 +10,27 @@ const LoggedOutView = props => {
 
         <li className="nav-item">
           <Link to="/" className="nav-link">
-          Home
+            Home
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="login" className="nav-link">
-          Sign in
+            Sign in
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="register" className="nav-link">
-          Sign up
+            Sign up
           </Link>
         </li>
+
       </ul>
     );
   }
   return null;
-}
+};
 
 const LoggedInView = props => {
   if (props.currentUser) {
@@ -39,29 +42,34 @@ const LoggedInView = props => {
             Home
           </Link>
         </li>
+
         <li className="nav-item">
           <Link to="editor" className="nav-link">
             <i className="ion-compose"></i>&nbsp;New Post
           </Link>
         </li>
+
         <li className="nav-item">
           <Link to="settings" className="nav-link">
             <i className="ion-gear-a"></i>&nbsp;Settings
           </Link>
         </li>
+
         <li className="nav-item">
           <Link
             to={`@${props.currentUser.username}`}
             className="nav-link">
             <img src={props.currentUser.image} className="user-pic" />
-            Hello {props.currentUser.username}!
+            {props.currentUser.username}
           </Link>
         </li>
+
       </ul>
     );
   }
+
   return null;
-}
+};
 
 class Header extends React.Component {
   render() {
@@ -69,13 +77,13 @@ class Header extends React.Component {
       <nav className="navbar navbar-light">
         <div className="container">
 
-        <Link to="/" className="navbar-brand">
-          {this.props.appName}
-        </Link>
+          <Link to="/" className="navbar-brand">
+            {this.props.appName.toLowerCase()}
+          </Link>
 
-        <LoggedOutView currentUser={this.props.currentUser} />
+          <LoggedOutView currentUser={this.props.currentUser} />
 
-        <LoggedInView currentUser={this.props.currentUser} />
+          <LoggedInView currentUser={this.props.currentUser} />
         </div>
       </nav>
     );

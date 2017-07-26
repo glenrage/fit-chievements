@@ -11,12 +11,13 @@ const mapDispatchToProps = dispatch => ({
   }),
   onLoad: (payload) =>
     dispatch({ type: 'PROFILE_FAVORITES_PAGE_LOADED', payload }),
+  onSetPage: (page, payload) => dispatch({ type: 'SET_PAGE', page, payload }),
   onUnfollow: username => dispatch({
     type: 'UNFOLLOW_USER',
     payload: agent.Profile.unfollow(username)
   }),
   onUnload: () =>
-    dispatch({ type: 'PROFILE_FAVORITES_PAGE_UNLOADED'})
+    dispatch({ type: 'PROFILE_FAVORITES_PAGE_UNLOADED' })
 });
 
 class ProfileFavorites extends Profile {
@@ -31,6 +32,12 @@ class ProfileFavorites extends Profile {
     this.props.onUnload();
   }
 
+  onSetPage(page) {
+    const promise =
+      agent.Articles.favoritedBy(this.props.profile.username, page);
+    this.props.onSetPage(page, promise);
+  }
+
   renderTabs() {
     return (
       <ul className="nav nav-pills outline-active">
@@ -38,7 +45,7 @@ class ProfileFavorites extends Profile {
           <Link
             className="nav-link"
             to={`@${this.props.profile.username}`}>
-            My Achievements
+            My Articles
           </Link>
         </li>
 
@@ -46,7 +53,7 @@ class ProfileFavorites extends Profile {
           <Link
             className="nav-link active"
             to={`@${this.props.profile.username}/favorites`}>
-            Favorited Achievements
+            Favorited Articles
           </Link>
         </li>
       </ul>

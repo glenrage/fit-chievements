@@ -27,17 +27,32 @@ const requests = {
     superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody)
 };
 
+const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
+const encode = encodeURIComponent;
+const omitSlug = article => Object.assign({}, article, { slug: undefined });
 const Articles = {
   all: page =>
-    requests.get(`/articles?limit=10`),
+    requests.get(`/articles?${limit(10, page)}`),
   byAuthor: (author, page) =>
-    requests.get(`/articles?author=${encodeURIComponent(author)}&limit=5`),
+    requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
+  byTag: (tag, page) =>
+    requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`),
   del: slug =>
     requests.del(`/articles/${slug}`),
+  favorite: slug =>
+    requests.post(`/articles/${slug}/favorite`),
   favoritedBy: (author, page) =>
-    requests.get(`/articles?favorited=${encodeURIComponent(author)}&limit=5`),
+    requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
+  unfavorite: slug =>
+    requests.del(`/articles/${slug}/favorite`),
+  feed: () =>
+    requests.get('/articles/feed?limit=10&offset=0'),
   get: slug =>
-    requests.get(`/articles/${slug}`)
+    requests.get(`/articles/${slug}`),
+  update: article =>
+    requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
+  create: article =>
+    requests.post('/articles', { article })
 };
 
 const Auth = {
@@ -69,10 +84,15 @@ const Profile = {
     requests.del(`/profiles/${username}/follow`)
 };
 
+const Tags = {
+  getAll: () => requests.get('/tags')
+};
+
 export default {
   Articles,
   Auth,
   Comments,
   Profile,
+  Tags,
   setToken: _token => { token = _token; }
 };
