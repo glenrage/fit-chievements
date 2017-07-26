@@ -13,7 +13,6 @@ const ArticleActions = props => {
   const del = () => {
     props.onClickDelete(agent.Articles.del(article.slug))
   };
-  
   if (props.canModify) {
     return (
       <span>

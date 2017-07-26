@@ -4,27 +4,29 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
   ...state.articleList
-})
+});
 
 const MainView = props => {
   return (
     <div className="col-md-9">
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
-          <li className="nav-item">
-            <a
-              href=""
-              className="nav-link active">
-              Global Feed
-            </a>
-          </li>
+
+        <li className="nav-item">
+          <a
+            href=""
+            className="nav-link active">
+            Global Feed
+          </a>
+        </li>
+
         </ul>
       </div>
+
       <ArticleList
-        articles={props.articles}
-      />
+        articles={props.articles} />
     </div>
   );
 };
 
-export default connect(mapStateToProps, () => ({}))(MainView)
+export default connect(mapStateToProps, () => ({}))(MainView);

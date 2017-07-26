@@ -28,7 +28,6 @@ class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props)
     if (nextProps.redirectTo) {
       this.context.router.replace(nextProps.redirectTo);
       this.props.onRedirect();
@@ -41,7 +40,7 @@ class App extends React.Component {
         <Header
           currentUser={this.props.currentUser}
           appName={this.props.appName} />
-          {this.props.children}
+        {this.props.children}
       </div>
     );
   }

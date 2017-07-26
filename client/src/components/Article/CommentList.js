@@ -12,7 +12,7 @@ const CommentList = props => {
               currentUser={props.currentUser}
               slug={props.slug}
               key={comment.id} />
-            );
+          );
         })
       }
     </div>
