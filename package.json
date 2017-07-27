@@ -1,47 +1,29 @@
 {
-  "name": "fit-chievements",
-  "version": "1.0.0",
-  "description": "Full Stack Application where Users can post their daily fitness achievements",
-  "main": "app.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "start": "nodemon ./server/app.js",
-    "test": "mocha"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/glenrage/fit-goals.git"
-  },
-  "author": "",
-  "license": "ISC",
+  "name": "front",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "body-parser": "1.15.0",
-    "cors": "2.7.1",
-    "ejs": "2.4.1",
-    "errorhandler": "1.4.3",
-    "eslint-config-airbnb": "^15.0.2",
-    "express": "4.13.4",
-    "express-jwt": "3.3.0",
-    "express-session": "1.13.0",
-    "jsonwebtoken": "7.1.9",
-    "method-override": "2.3.5",
-    "methods": "1.1.2",
-    "mongoose": "4.4.10",
-    "mongoose-unique-validator": "1.0.2",
-    "morgan": "1.7.0",
-    "passport": "0.3.2",
-    "passport-local": "1.0.0",
-    "request": "2.69.0",
-    "slug": "0.9.1",
-    "underscore": "1.8.3"
+    "history": "^4.3.0",
+    "marked": "^0.3.6",
+    "prop-types": "^15.5.10",
+    "react": "^15.5.0",
+    "react-dom": "^15.5.0",
+    "react-redux": "^4.4.8",
+    "react-router": "^3.0.4",
+    "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-logger": "^3.0.1",
+    "superagent": "^2.3.0",
+    "superagent-promise": "^1.1.0"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "react-scripts": "1.0.10",
+    "cross-env": "^4.0.0"
   },
-  "bugs": {
-    "url": "https://github.com/glenrage/fit-goals/issues"
-  },
-  "homepage": "https://github.com/glenrage/fit-goals#readme"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
 }
