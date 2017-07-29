@@ -1,12 +1,12 @@
 # Fit-chievements
 
-Fit-chievements is a social media application where users can post their fitness related articles. Recent Facebook trends have frowned upon people "checking in" while they are at the gym, or posting pictures of their bland salads. Fit-chievements solves the problem by offering fitness enthusiasts a place to post their fitness articles and gain self esteem points and validation from other users.
+Fit-chievements is a social media application where users can post their fitness related achievements. Recent Facebook trends have frowned upon people "checking in" while they are at the gym, or posting pictures of their bland salads. Fit-chievements solves the problem by offering fitness enthusiasts a place to post their fitness achievements and gain self esteem points and validation from other users.
 
 (deployed link goes here)
 
 ## Getting Started
 
-If you are a new user click "Register" to signup. Then login with your email and password. To post an article type in your article or upload a picture to go along with it. You can "like" other user's articles and follow other users as well. To delete an article click the trash icon.
+If you are a new user click "Register" to signup. Then login with your email and password. To post an achievement type in your achievement or upload a picture to go along with it. You can "like" other user's achievements and follow other users as well. To delete an achievement click the trash icon.
 
 ### Installing
 
