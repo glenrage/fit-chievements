@@ -52,7 +52,7 @@ const AchievementPreview = props => {
 
         <div className="pull-xs-right">
           <button className={likeButtonClass} onClick={handleClick}>
-            <i className="ion-heart"></i> {achievement.likesCount}
+            <i className="ion-thumbsup"></i> {achievement.likesCount}
           </button>
         </div>
       </div>
@@ -60,6 +60,10 @@ const AchievementPreview = props => {
       <Link to={`achievement/${achievement.slug}`} className="preview-link">
         <h1>{achievement.title}</h1>
         <p>{achievement.description}</p>
+        <div className="image-preview">
+          <img src={achievement.photo}/>
+        </div>
+
         <span>Read more...</span>
         <ul className="tag-list">
           {

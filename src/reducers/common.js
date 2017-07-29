@@ -17,7 +17,6 @@ export default (state = defaultState, action) => {
     case 'LOGOUT':
       return { ...state, redirectTo: '/', token: null, currentUser: null };
     case 'ACHIEVEMENT_SUBMITTED':
-      console.log(action.payload)
       const redirectUrl = `achievement/${action.payload.achievement.slug}`;
       return { ...state, redirectTo: redirectUrl };
     case 'SETTINGS_SAVED':

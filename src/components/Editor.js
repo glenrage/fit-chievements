@@ -2,6 +2,11 @@ import ListErrors from './ListErrors';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
+import request from 'superagent';
+import Dropzone from 'react-dropzone';
+
+const CLOUDINARY_UPLOAD_PRESET = 'vj7a0ppk'
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/glenrage/upload'
 
 const mapStateToProps = state => ({
   ...state.editor
@@ -26,11 +31,16 @@ class Editor extends React.Component {
   constructor() {
     super();
 
+    this.state = {
+      uploadedFileCloudinaryUrl: ''
+    };
+
     const updateFieldEvent =
       key => ev => this.props.onUpdateField(key, ev.target.value);
     this.changeTitle = updateFieldEvent('title');
     this.changeDescription = updateFieldEvent('description');
     this.changeBody = updateFieldEvent('body');
+    this.changePhoto = updateFieldEvent('photo');
     this.changeTagInput = updateFieldEvent('tagInput');
 
     this.watchForEnter = ev => {
@@ -50,8 +60,10 @@ class Editor extends React.Component {
         title: this.props.title,
         description: this.props.description,
         body: this.props.body,
+        photo: this.state.uploadedFileCloudinaryUrl,
         tagList: this.props.tagList
       };
+
 
       const slug = { slug: this.props.achievementSlug };
       const promise = this.props.achievementSlug ?
@@ -59,9 +71,31 @@ class Editor extends React.Component {
         agent.Achievements.create(achievement);
 
       this.props.onSubmit(promise);
-    };
-  }
+    }
 
+    this.onImageDrop = files => {
+      this.handleImageUpload(files[0])
+    }
+
+    this.handleImageUpload = file => {
+      let upload = request.post(CLOUDINARY_UPLOAD_URL)
+      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+      .field('file', file);
+
+      upload.end((err, response) => {
+        if (err) {
+          console.error(err);
+        }
+
+        if(response.body.secure_url) {
+          this.setState({
+            uploadedFileCloudinaryUrl: response.body.secure_url
+          });
+        }
+      })
+    }
+
+  };
   componentWillReceiveProps(nextProps) {
     if (this.props.params.slug !== nextProps.params.slug) {
       if (nextProps.params.slug) {
@@ -108,20 +142,43 @@ class Editor extends React.Component {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="What's this achievement about?"
+                      placeholder="Enter short description"
                       value={this.props.description}
                       onChange={this.changeDescription} />
+                  </fieldset>
+
+                  <fieldset className="form-group">
+                  <div className="form-control">
+                    <Dropzone
+                      multiple={false}
+                      accept="image/*"
+                      onDrop={this.onImageDrop.bind(this)} >
+                    <p>Click to upload a photo </p>
+                    </Dropzone>
+
+                    </div>
+
+                    <div>
+                    { this.state.uploadedFileCloudinaryUrl === '' ? null :
+                    <div className="form-control">
+                    <p>{this.state.uploadedFile}</p>
+                    <img src={this.state.uploadedFileCloudinaryUrl} />
+                    </div> }
+                    </div>
+
                   </fieldset>
 
                   <fieldset className="form-group">
                     <textarea
                       className="form-control"
                       rows="8"
-                      placeholder="Write your achievement (in markdown)"
+                      placeholder="Enter long description"
                       value={this.props.body}
                       onChange={this.changeBody}>
+
                     </textarea>
                   </fieldset>
+
 
                   <fieldset className="form-group">
                     <input
@@ -137,7 +194,7 @@ class Editor extends React.Component {
                         (this.props.tagList || []).map(tag => {
                           return (
                             <span className="tag-default tag-pill" key={tag}>
-                              <i  className="ion-close-round"
+                              <i className="ion-close-round"
                                   onClick={this.removeTagHandler(tag)}>
                               </i>
                               {tag}
@@ -148,16 +205,25 @@ class Editor extends React.Component {
                     </div>
                   </fieldset>
 
-                  <button
-                    className="btn btn-lg pull-xs-right btn-primary"
-                    type="button"
-                    disabled={this.props.inProgress}
-                    onClick={this.submitForm}>
-                    Publish Achievement
-                  </button>
+
+
 
                 </fieldset>
+
+
               </form>
+
+            <form>
+
+          </form>
+
+          <button
+          className="btn btn-lg pull-xs-right btn-primary"
+          type="button"
+          disabled={this.props.inProgress}
+          onClick={this.submitForm}>
+          Publish Achievement
+          </button>
 
             </div>
           </div>

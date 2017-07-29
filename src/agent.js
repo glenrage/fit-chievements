@@ -3,7 +3,6 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-
 const API_ROOT = 'http://localhost:3000/api';
 // const API_ROOT = 'https://fitchievements-api.herokuapp.com/api';
 
@@ -24,7 +23,8 @@ const requests = {
   post: (url, body) =>
     superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
   put: (url, body) =>
-    superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody)
+    superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
+
 };
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
@@ -52,7 +52,9 @@ const Achievements = {
   update: achievement =>
     requests.put(`/achievements/${achievement.slug}`, { achievement: omitSlug(achievement) }),
   create: achievement =>
-    requests.post('/achievements', { achievement })
+    requests.post('/achievements', { achievement }),
+  uploadPhoto: file =>
+    requests.upload('/photos/photo', { file })
 };
 
 const Auth = {

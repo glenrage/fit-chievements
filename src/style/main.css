@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto');
+
+.logo-font {
+  font-family: "Roboto", sans-serif;
+}
 
 .tag-default {
   color: #fff !important;
@@ -23,7 +28,7 @@ ul.tag-list {
     display: inline-block !important; }
 
 .navbar-brand {
-  font-family: "Titillium Web", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1.5rem !important;
   padding-top: 0rem !important;
   margin-right: 2rem !important;
@@ -109,30 +114,40 @@ footer {
     .achievement-meta .info .date {
       color: #bbb;
       font-size: 0.8rem;
-      display: block; }
+      display: block;
+    }
 
 .achievement-preview {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 1.5rem 0; }
+  padding: 1.5rem 0;
+}
   .achievement-preview .achievement-meta {
-    margin: 0 0 1rem 0; }
+    margin: 0 0 1rem 0;
+  }
   .achievement-preview .preview-link h1 {
     font-weight: 600 !important;
     font-size: 1.5rem !important;
-    margin-bottom: 3px; }
+    margin-bottom: 3px;
+  }
   .achievement-preview .preview-link p {
     font-weight: 300;
     font-size: 24px;
     color: #999;
     margin-bottom: 15px;
     font-size: 1rem;
-    line-height: 1.3rem; }
+    line-height: 1.3rem;
+   }
   .achievement-preview .preview-link span {
     max-width: 30%;
     font-size: 0.8rem;
     font-weight: 300;
     color: #bbb;
-    vertical-align: middle; }
+    vertical-align: middle;
+  }
+  .achievement-preview .image-preview {
+    max-width: 10%;
+    max-height: 10%;
+  }
   .achievement-preview .preview-link ul {
     float: right;
     max-width: 50%;
@@ -188,7 +203,7 @@ footer {
       color: #fff; }
 
 .achievement-page .achievement-content p {
-  font-family: 'Source Serif Pro', serif;
+  font-family: 'Roboto', serif;
   font-size: 1.2rem;
   line-height: 1.8rem;
   margin-bottom: 2rem; }
@@ -277,4 +292,5 @@ footer {
 .editor-page .tag-list i {
   font-size: 0.6rem;
   margin-right: 5px;
-  cursor: pointer; }
+  cursor: pointer;
+}

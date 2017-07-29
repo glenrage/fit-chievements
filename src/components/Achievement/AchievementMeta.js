@@ -4,6 +4,7 @@ import React from 'react';
 
 const AchievementMeta = props => {
   const achievement = props.achievement;
+
   return (
     <div className="achievement-meta">
       <Link to={`@${achievement.author.username}`}>
