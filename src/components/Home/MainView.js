@@ -72,7 +72,7 @@ const mapDispatchToProps = dispatch => ({
 const MainView = props => {
   const onSetPage = page => props.onSetPage(props.tab, page);
   return (
-    <div className="col-md-8">
+    <div className="col-md-12">
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
 
@@ -81,9 +81,9 @@ const MainView = props => {
             tab={props.tab}
             onTabClick={props.onTabClick} />
 
-          <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
-
-          <TagFilterTab tag={props.tag} />
+          <GlobalFeedTab
+            tab={props.tab}
+            onTabClick={props.onTabClick} />
 
         </ul>
       </div>
@@ -99,3 +99,5 @@ const MainView = props => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView);
+
+  // <TagFilterTab tag={props.tag} />

@@ -306,10 +306,10 @@ blockquote {
   margin: 0 0 1rem; }
 
 a {
-  color: #20c2df;
+  color: #da8e28;
   text-decoration: none; }
   a:focus, a:hover {
-    color: #83a6f5;
+    color: red;
     text-decoration: underline; }
   a:focus {
     outline: thin dotted;
@@ -1981,11 +1981,11 @@ fieldset[disabled] a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #316fe8;
+  background-color: #0079d1;
   border-color: #316fe8; }
   .btn-primary:hover {
     color: #fff;
-    background-color: #316fe8;
+    background-color: #2ecafb;
     border-color: #316fe8; }
   .btn-primary:focus, .btn-primary.focus {
     color: #fff;

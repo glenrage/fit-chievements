@@ -9,19 +9,19 @@ const LoggedOutView = props => {
 
         <li className="nav-item">
           <Link to="/" className="nav-link">
-            Home
+            <i className="ion-home"></i>
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="login" className="nav-link">
-            Sign in
+              <span>Sign in</span>
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="register" className="nav-link">
-            Sign up
+            <span>Sign up</span>
           </Link>
         </li>
       </ul>
@@ -58,7 +58,7 @@ const LoggedInView = props => {
             to={`@${props.currentUser.username}`}
             className="nav-link">
             <img src={props.currentUser.image} className="user-pic" alt="" />
-            <span> Hi {props.currentUser.username}</span>
+            <span>{props.currentUser.username}</span>
           </Link>
         </li>
 
