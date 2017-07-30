@@ -5,6 +5,8 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
+    default:
+      break;
     case 'APP_LOAD':
       return {
         ...state,

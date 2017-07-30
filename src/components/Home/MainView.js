@@ -56,7 +56,8 @@ const TagFilterTab = props => {
 
 const mapStateToProps = state => ({
   ...state.achievementList,
-  token: state.common.token
+  token: state.common.token,
+  tags: state.home.tags
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -88,6 +89,7 @@ const MainView = props => {
       </div>
 
       <AchievementList
+        loading={props.loading}
         achievements={props.achievements}
         achievementsCount={props.achievementsCount}
         currentPage={props.currentPage}

@@ -1,5 +1,7 @@
 export default (state = {}, action) => {
   switch (action.type) {
+    default:
+      break;
     case 'SETTINGS_SAVED':
       return {
         ...state,

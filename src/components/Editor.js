@@ -40,7 +40,6 @@ class Editor extends React.Component {
     this.changeTitle = updateFieldEvent('title');
     this.changeDescription = updateFieldEvent('description');
     this.changeBody = updateFieldEvent('body');
-    this.changePhoto = updateFieldEvent('photo');
     this.changeTagInput = updateFieldEvent('tagInput');
 
     this.watchForEnter = ev => {
@@ -60,8 +59,8 @@ class Editor extends React.Component {
         title: this.props.title,
         description: this.props.description,
         body: this.props.body,
-        photo: this.state.uploadedFileCloudinaryUrl,
-        tagList: this.props.tagList
+        tagList: this.props.tagList,
+        photo: this.state.uploadedFileCloudinaryUrl
       };
 
 
@@ -162,7 +161,7 @@ class Editor extends React.Component {
                     { this.state.uploadedFileCloudinaryUrl === '' ? null :
                     <div className="form-control">
                     <p>{this.state.uploadedFile}</p>
-                    <img src={this.state.uploadedFileCloudinaryUrl} />
+                    <img src={this.state.uploadedFileCloudinaryUrl} alt="" />
                     </div> }
                     </div>
 
@@ -204,26 +203,15 @@ class Editor extends React.Component {
                       }
                     </div>
                   </fieldset>
-
-
-
-
+                  <button
+                  className="btn btn-lg pull-xs-right btn-primary"
+                  type="button"
+                  disabled={this.props.inProgress}
+                  onClick={this.submitForm} >
+                  Post Achievement
+                  </button>
                 </fieldset>
-
-
               </form>
-
-            <form>
-
-          </form>
-
-          <button
-          className="btn btn-lg pull-xs-right btn-primary"
-          type="button"
-          disabled={this.props.inProgress}
-          onClick={this.submitForm}>
-          Publish Achievement
-          </button>
 
             </div>
           </div>

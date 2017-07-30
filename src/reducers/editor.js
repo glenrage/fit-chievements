@@ -1,16 +1,15 @@
 export default (state = {}, action) => {
   switch (action.type) {
     case 'EDITOR_PAGE_LOADED':
-      console.log(action.payload)
       return {
         ...state,
         achievementSlug: action.payload ? action.payload.achievement.slug : '',
         title: action.payload ? action.payload.achievement.title : '',
         description: action.payload ? action.payload.achievement.description : '',
         body: action.payload ? action.payload.achievement.body : '',
-        photo: action.payload ? action.payload.achievement.photo : '',
         tagInput: '',
-        tagList: action.payload ? action.payload.achievement.tagList : []
+        tagList: action.payload ? action.payload.achievement.tagList : [],
+        photo: action.payload ? action.payload.achievement.photo : '',
       };
     case 'EDITOR_PAGE_UNLOADED':
       return {};
@@ -20,10 +19,6 @@ export default (state = {}, action) => {
         inProgress: null,
         errors: action.error ? action.payload.errors : null
       };
-    case 'IMAGE_UPLOADED':
-      return {
-        ...state
-      }
     case 'ASYNC_START':
       if (action.subtype === 'ACHIEVEMENT_SUBMITTED') {
         return { ...state, inProgress: true };

@@ -8,7 +8,7 @@ const AchievementMeta = props => {
   return (
     <div className="achievement-meta">
       <Link to={`@${achievement.author.username}`}>
-        <img src={achievement.author.image} />
+        <img src={achievement.author.image} alt="" />
       </Link>
 
       <div className="info">

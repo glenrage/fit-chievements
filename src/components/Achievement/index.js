@@ -33,7 +33,6 @@ class Achievement extends React.Component {
     if (!this.props.achievement) {
       return null;
     }
-    console.log(JSON.stringify(this.props.achievement))
 
     const markup = { __html: marked(this.props.achievement.body) };
     const canModify = this.props.currentUser &&
@@ -56,7 +55,7 @@ class Achievement extends React.Component {
 
           <div className="row achievement-content">
             <div className="col-xs-12">
-            <img src={this.props.achievement.photo} />
+            <img src={this.props.achievement.photo} alt="" />
 
               <div dangerouslySetInnerHTML={markup}></div>
 

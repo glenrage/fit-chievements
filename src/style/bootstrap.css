@@ -2937,7 +2937,7 @@ input[type="button"].btn-block {
     display: table;
     clear: both; }
   .nav-tabs .nav-item {
-    float: left;
+    text-align: center;
     margin-bottom: -1px; }
     .nav-tabs .nav-item + .nav-item {
       margin-left: 0.2rem; }

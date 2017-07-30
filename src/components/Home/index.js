@@ -22,6 +22,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch({  type: 'HOME_PAGE_UNLOADED' })
 });
 
+
+
 class Home extends React.Component {
   componentWillMount() {
     const tab = this.props.token ? 'feed' : 'all';
@@ -29,8 +31,10 @@ class Home extends React.Component {
       agent.Achievements.feed() :
       agent.Achievements.all();
 
-    this.props.onLoad(tab, Promise.all([agent.Tags.getAll(), achievementsPromise]));
+    this.props.onLoad(tab, achievementsPromise, Promise.all([agent.Tags.getAll(),achievementsPromise]));
   }
+
+
 
   componentWillUnmount() {
     this.props.onUnload();
@@ -58,7 +62,6 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
-
       </div>
     );
   }

@@ -128,7 +128,7 @@ class Profile extends React.Component {
             <div className="row">
               <div className="col-xs-12 col-md-10 offset-md-1">
 
-                <img src={profile.image} className="user-img" />
+                <img src={profile.image} className="user-img" alt=""/>
                 <h4>{profile.username}</h4>
                 <p>{profile.bio}</p>
                 <p>Following : {profile.followingUsers}</p>

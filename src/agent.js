@@ -52,9 +52,7 @@ const Achievements = {
   update: achievement =>
     requests.put(`/achievements/${achievement.slug}`, { achievement: omitSlug(achievement) }),
   create: achievement =>
-    requests.post('/achievements', { achievement }),
-  uploadPhoto: file =>
-    requests.upload('/photos/photo', { file })
+    requests.post('/achievements', { achievement })
 };
 
 const Auth = {
