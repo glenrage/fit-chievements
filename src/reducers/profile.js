@@ -1,5 +1,6 @@
 export default (state = {}, action) => {
   switch (action.type) {
+
     case 'PROFILE_PAGE_LOADED':
     case 'PROFILE_LIKES_PAGE_LOADED':
       return {

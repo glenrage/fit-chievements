@@ -19,7 +19,7 @@ const Tags = props => {
                 className="tag-default tag-pill"
                 key={tag}
                 onClick={handleClick}>
-                {tag}
+                {tag} tags here
               </a>
             );
           })

@@ -1,5 +1,4 @@
 
-
 export default (state = {}, action) => {
   switch (action.type) {
     case 'ACHIEVEMENT_PAGE_LOADED':

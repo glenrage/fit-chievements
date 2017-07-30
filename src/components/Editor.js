@@ -40,7 +40,6 @@ class Editor extends React.Component {
     this.changeTitle = updateFieldEvent('title');
     this.changeDescription = updateFieldEvent('description');
     this.changeBody = updateFieldEvent('body');
-    this.changePhoto = updateFieldEvent('photo');
     this.changeTagInput = updateFieldEvent('tagInput');
 
     this.watchForEnter = ev => {
@@ -60,8 +59,8 @@ class Editor extends React.Component {
         title: this.props.title,
         description: this.props.description,
         body: this.props.body,
-        photo: this.state.uploadedFileCloudinaryUrl,
-        tagList: this.props.tagList
+        tagList: this.props.tagList,
+        photo: this.state.uploadedFileCloudinaryUrl
       };
 
 
@@ -69,7 +68,7 @@ class Editor extends React.Component {
       const promise = this.props.achievementSlug ?
         agent.Achievements.update(Object.assign(achievement, slug)) :
         agent.Achievements.create(achievement);
-
+        console.log('submit' + JSON.stringify(achievement))
       this.props.onSubmit(promise);
     }
 
@@ -155,17 +154,14 @@ class Editor extends React.Component {
                       onDrop={this.onImageDrop.bind(this)} >
                     <p>Click to upload a photo </p>
                     </Dropzone>
-
                     </div>
-
                     <div>
-                    { this.state.uploadedFileCloudinaryUrl === '' ? null :
-                    <div className="form-control">
-                    <p>{this.state.uploadedFile}</p>
-                    <img src={this.state.uploadedFileCloudinaryUrl} />
+                      { this.state.uploadedFileCloudinaryUrl === '' ? null :
+                      <div className="form-control">
+                      <p>{this.state.uploadedFile}</p>
+                      <img src={this.state.uploadedFileCloudinaryUrl} alt="" />
                     </div> }
                     </div>
-
                   </fieldset>
 
                   <fieldset className="form-group">
@@ -175,55 +171,19 @@ class Editor extends React.Component {
                       placeholder="Enter long description"
                       value={this.props.body}
                       onChange={this.changeBody}>
-
                     </textarea>
                   </fieldset>
 
 
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Enter Hash Tags"
-                      value={this.props.tagInput}
-                      onChange={this.changeTagInput}
-                      onKeyUp={this.watchForEnter} />
-
-                    <div className="tag-list">
-                      {
-                        (this.props.tagList || []).map(tag => {
-                          return (
-                            <span className="tag-default tag-pill" key={tag}>
-                              <i className="ion-close-round"
-                                  onClick={this.removeTagHandler(tag)}>
-                              </i>
-                              {tag}
-                            </span>
-                          );
-                        })
-                      }
-                    </div>
-                  </fieldset>
-
-
-
-
+                  <button
+                  className="btn btn-lg pull-xs-right btn-primary"
+                  type="button"
+                  disabled={this.props.inProgress}
+                  onClick={this.submitForm} >
+                  Post Achievement
+                  </button>
                 </fieldset>
-
-
               </form>
-
-            <form>
-
-          </form>
-
-          <button
-          className="btn btn-lg pull-xs-right btn-primary"
-          type="button"
-          disabled={this.props.inProgress}
-          onClick={this.submitForm}>
-          Publish Achievement
-          </button>
 
             </div>
           </div>
@@ -234,3 +194,28 @@ class Editor extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor);
+//
+// <fieldset className="form-group">
+//   <input
+//     className="form-control"
+//     type="text"
+//     placeholder="Enter Hash Tags"
+//     value={this.props.tagInput}
+//     onChange={this.changeTagInput}
+//     onKeyUp={this.watchForEnter} />
+//
+//   <div className="tag-list">
+//     {
+//       (this.props.tagList || []).map(tag => {
+//         return (
+//           <span className="tag-default tag-pill" key={tag}>
+//             <i className="ion-close-round"
+//                 onClick={this.removeTagHandler(tag)}>
+//             </i>
+//             {tag} tags here
+//           </span>
+//         );
+//       })
+//     }
+//   </div>
+// </fieldset>

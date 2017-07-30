@@ -46,22 +46,23 @@ class Home extends React.Component {
           <div className="row">
             <MainView />
 
-            <div className="col-md-3">
-              <div className="sidebar">
 
-                <p>Popular Hash Tags</p>
-                <Tags
-                  tags={this.props.tags}
-                  onClickTag={this.props.onClickTag} />
-
-              </div>
-            </div>
           </div>
         </div>
-
       </div>
     );
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
+
+// <div className="col-md-3">
+//   <div className="sidebar">
+//
+//     <p>Popular Hash Tags</p>
+//     <Tags
+//       tags={this.props.tags}
+//       onClickTag={this.props.onClickTag} />
+//
+//   </div>
+// </div>

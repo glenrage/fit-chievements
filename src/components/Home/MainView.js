@@ -56,7 +56,8 @@ const TagFilterTab = props => {
 
 const mapStateToProps = state => ({
   ...state.achievementList,
-  token: state.common.token
+  token: state.common.token,
+  // tags: state.home.tags
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -71,7 +72,7 @@ const mapDispatchToProps = dispatch => ({
 const MainView = props => {
   const onSetPage = page => props.onSetPage(props.tab, page);
   return (
-    <div className="col-md-9">
+    <div className="col-md-12">
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
 
@@ -80,14 +81,15 @@ const MainView = props => {
             tab={props.tab}
             onTabClick={props.onTabClick} />
 
-          <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
-
-          <TagFilterTab tag={props.tag} />
+          <GlobalFeedTab
+            tab={props.tab}
+            onTabClick={props.onTabClick} />
 
         </ul>
       </div>
 
       <AchievementList
+        loading={props.loading}
         achievements={props.achievements}
         achievementsCount={props.achievementsCount}
         currentPage={props.currentPage}
@@ -97,3 +99,5 @@ const MainView = props => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView);
+
+  // <TagFilterTab tag={props.tag} />

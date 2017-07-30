@@ -2,7 +2,11 @@ import ListErrors from './ListErrors';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
+import request from 'superagent';
+import Dropzone from 'react-dropzone';
 
+const CLOUDINARY_UPLOAD_PRESET = 'vj7a0ppk'
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/glenrage/upload'
 
 class SettingsForm extends React.Component {
   constructor() {
@@ -13,7 +17,8 @@ class SettingsForm extends React.Component {
       username: '',
       bio: '',
       email: '',
-      password: ''
+      password: '',
+      uploadedFileCloudinaryUrl: ''
     };
 
     this.updateState = field => ev => {
@@ -29,9 +34,32 @@ class SettingsForm extends React.Component {
       if (!user.password) {
         delete user.password;
       }
-
+      console.log(JSON.stringify(user))
       this.props.onSubmitForm(user);
     };
+
+    this.onImageDrop = files => {
+      this.handleImageUpload(files[0])
+    }
+
+    this.handleImageUpload = file => {
+      let upload = request.post(CLOUDINARY_UPLOAD_URL)
+      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+      .field('file', file);
+
+      upload.end((err, response) => {
+        if (err) {
+          console.error(err);
+        }
+
+        if(response.body.secure_url) {
+          this.setState({
+            image: response.body.secure_url,
+            uploadedFileCloudinaryUrl: response.body.secure_url
+          });
+        }
+      })
+    }
   }
 
   componentWillMount() {
@@ -68,6 +96,27 @@ class SettingsForm extends React.Component {
               placeholder="URL of profile picture"
               value={this.state.image}
               onChange={this.updateState('image')} />
+          </fieldset>
+
+          <fieldset className="form-group">
+          <div className="form-control">
+            <Dropzone
+              multiple={false}
+              accept="image/*"
+              onDrop={this.onImageDrop.bind(this)} >
+            <p>Click to upload your own avatar</p>
+            </Dropzone>
+
+            </div>
+
+            <div>
+            { this.state.uploadedFileCloudinaryUrl === '' ? null :
+            <div className="form-control">
+            <p>{this.state.uploadedFile}</p>
+            <img src={this.state.uploadedFileCloudinaryUrl} alt="" />
+            </div> }
+            </div>
+
           </fieldset>
 
           <fieldset className="form-group">
