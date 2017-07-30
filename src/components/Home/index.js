@@ -22,8 +22,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch({  type: 'HOME_PAGE_UNLOADED' })
 });
 
-
-
 class Home extends React.Component {
   componentWillMount() {
     const tab = this.props.token ? 'feed' : 'all';
@@ -31,10 +29,8 @@ class Home extends React.Component {
       agent.Achievements.feed() :
       agent.Achievements.all();
 
-    this.props.onLoad(tab, achievementsPromise, Promise.all([agent.Tags.getAll(),achievementsPromise]));
+    this.props.onLoad(tab, Promise.all([agent.Tags.getAll(), achievementsPromise]));
   }
-
-
 
   componentWillUnmount() {
     this.props.onUnload();
@@ -50,16 +46,7 @@ class Home extends React.Component {
           <div className="row">
             <MainView />
 
-            <div className="col-md-3">
-              <div className="sidebar">
 
-                <p>Popular Hash Tags</p>
-                <Tags
-                  tags={this.props.tags}
-                  onClickTag={this.props.onClickTag} />
-
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -68,3 +55,14 @@ class Home extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
+
+// <div className="col-md-3">
+//   <div className="sidebar">
+//
+//     <p>Popular Hash Tags</p>
+//     <Tags
+//       tags={this.props.tags}
+//       onClickTag={this.props.onClickTag} />
+//
+//   </div>
+// </div>

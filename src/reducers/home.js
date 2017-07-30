@@ -1,7 +1,5 @@
 export default (state = {}, action) => {
   switch (action.type) {
-    default:
-      break;
     case 'HOME_PAGE_LOADED':
       return {
         ...state,

@@ -29,7 +29,6 @@ export default (state = {}, action) => {
     case 'APPLY_TAG_FILTER':
       return {
         ...state,
-        pager: action.pager,
         achievements: action.payload.achievements,
         achievementsCount: action.payload.achievementsCount,
         tab: null,

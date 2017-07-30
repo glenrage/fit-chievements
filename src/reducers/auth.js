@@ -1,7 +1,5 @@
 export default (state = {}, action) => {
   switch (action.type) {
-    default:
-      break;
     case 'LOGIN':
     case 'REGISTER':
       return {

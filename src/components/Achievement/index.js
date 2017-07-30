@@ -59,8 +59,6 @@ class Achievement extends React.Component {
 
               <div dangerouslySetInnerHTML={markup}></div>
 
-
-
               <ul className="tag-list">
                 {
                   this.props.achievement.tagList.map(tag => {

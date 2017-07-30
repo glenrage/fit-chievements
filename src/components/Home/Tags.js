@@ -10,7 +10,7 @@ const Tags = props => {
           tags.map(tag => {
             const handleClick = ev => {
               ev.preventDefault();
-              props.onClickTag(tag, page => agent.Achievements.byTag(tag, page), agent.Achievements.byTag(tag));
+              props.onClickTag(tag, agent.Achievements.byTag(tag));
             };
 
             return (
@@ -19,7 +19,7 @@ const Tags = props => {
                 className="tag-default tag-pill"
                 key={tag}
                 onClick={handleClick}>
-                {tag}
+                {tag} tags here
               </a>
             );
           })
