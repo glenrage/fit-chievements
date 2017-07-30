@@ -1,5 +1,5 @@
 const defaultState = {
-  appName: 'fit-chievements',
+  appName: 'FIT-chievements',
   token: null
 };
 

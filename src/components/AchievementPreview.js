@@ -24,7 +24,6 @@ const AchievementPreview = props => {
    LIKED_CLASS :
    NOT_LIKED_CLASS;
 
-
   const handleClick = ev => {
     ev.preventDefault();
     if (achievement.liked) {
@@ -65,20 +64,24 @@ const AchievementPreview = props => {
         </div>
 
         <span>Read more...</span>
-        <ul className="tag-list">
-          {
-            achievement.tagList.map(tag => {
-              return (
-                <li className="tag-default tag-pill tag-outline" key={tag}>
-                  {tag}
-                </li>
-              )
-            })
-          }
-        </ul>
+
       </Link>
+
     </div>
+
   );
 }
 
 export default connect(() => ({}), mapDispatchToProps)(AchievementPreview);
+
+// <ul className="tag-list">
+//   {
+//     achievement.tagList.map(tag => {
+//       return (
+//         <li className="tag-default tag-pill tag-outline" key={tag}>
+//           {tag}
+//         </li>
+//       )
+//     })
+//   }
+// </ul>

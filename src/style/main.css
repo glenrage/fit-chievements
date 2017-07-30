@@ -1,5 +1,201 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Roboto');
 
+.navbar {
+  position: relative;
+  background-color: #773737;
+  color: white;
+  padding: 0.5rem 1rem;
+}
+
+.navbar::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (min-width: 544px) {
+  .navbar {
+    border-radius: 0.25rem;
+  }
+}
+
+.navbar-full {
+  z-index: 1000;
+}
+
+@media (min-width: 544px) {
+  .navbar-full {
+    border-radius: 0;
+  }
+}
+
+.navbar-fixed-top, .navbar-fixed-bottom {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+@media (min-width: 544px) {
+  .navbar-fixed-top, .navbar-fixed-bottom {
+    border-radius: 0;
+  }
+}
+
+.navbar-fixed-top {
+  top: 0;
+}
+
+.navbar-fixed-bottom {
+  bottom: 0;
+}
+
+.navbar-sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  width: 100%;
+}
+
+@media (min-width: 544px) {
+  .navbar-sticky-top {
+    border-radius: 0;
+  }
+}
+
+.navbar-brand:focus, .navbar-brand:hover {
+  text-decoration: none;
+}
+
+.navbar-brand>img {
+  display: block;
+}
+
+.navbar-divider {
+  float: left;
+  width: 1px;
+  padding-top: .425rem;
+  padding-bottom: .425rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  overflow: hidden;
+}
+
+.navbar-divider::before {
+  content: "\00a0";
+}
+
+.navbar-toggler {
+  padding: .5rem .75rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.navbar-toggler:focus, .navbar-toggler:hover {
+  text-decoration: none;
+}
+
+@media (min-width: 544px) {
+  .navbar-toggleable-xs {
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-toggleable-sm {
+    display: block !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar-toggleable-md {
+    display: block !important;
+  }
+}
+
+.navbar-nav .nav-item {
+  float: left;
+}
+
+.navbar-nav .nav-item .nav-link {
+  color:white;
+  font-size: 1.5em;
+}
+
+.navbar-nav .nav-item .nav-link i {
+  color:white;
+}
+
+.navbar-nav .nav-item .nav-link span {
+  color:white!important
+}
+
+
+/*.navbar-nav .nav-link {
+  display: block;
+  padding-top: .425rem;
+  padding-bottom: .425rem;
+}*/
+
+.navbar-nav .nav-link+.nav-link {
+  margin-left: 1rem;
+}
+
+.navbar-nav .nav-item+.nav-item {
+  margin-left: 1rem;
+}
+
+.navbar-light .navbar-brand {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.navbar-light .navbar-nav .open>.nav-link, .navbar-light .navbar-nav .open>.nav-link:focus, .navbar-light .navbar-nav .open>.nav-link:hover, .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .active>.nav-link:focus, .navbar-light .navbar-nav .active>.nav-link:hover, .navbar-light .navbar-nav .nav-link.open, .navbar-light .navbar-nav .nav-link.open:focus, .navbar-light .navbar-nav .nav-link.open:hover, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.active:focus, .navbar-light .navbar-nav .nav-link.active:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.navbar-light .navbar-divider {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.navbar-dark .navbar-brand {
+  color: white;
+}
+
+.navbar-dark .navbar-brand:focus, .navbar-dark .navbar-brand:hover {
+  color: white;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar-dark .navbar-nav .open>.nav-link, .navbar-dark .navbar-nav .open>.nav-link:focus, .navbar-dark .navbar-nav .open>.nav-link:hover, .navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .active>.nav-link:focus, .navbar-dark .navbar-nav .active>.nav-link:hover, .navbar-dark .navbar-nav .nav-link.open, .navbar-dark .navbar-nav .nav-link.open:focus, .navbar-dark .navbar-nav .nav-link.open:hover, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.active:focus, .navbar-dark .navbar-nav .nav-link.active:hover {
+  color: white;
+}
+
+.navbar-dark .navbar-divider {
+  background-color: rgba(255, 255, 255, 0.075);
+}
+
 .logo-font {
   font-family: "Roboto", sans-serif;
 }
@@ -12,49 +208,65 @@
   white-space: nowrap;
   margin-right: 3px;
   margin-bottom: 0.2rem;
-  display: inline-block; }
-  .tag-default:hover {
-    text-decoration: none; }
-  .tag-default.tag-outline {
-    border: 1px solid #ddd;
-    color: #aaa !important;
-    background: none !important; }
+  display: inline-block;
+}
+
+.tag-default:hover {
+  text-decoration: none;
+}
+
+.tag-default.tag-outline {
+  border: 1px solid #ddd;
+  color: #aaa !important;
+  background: none !important;
+}
 
 ul.tag-list {
   padding-left: 0px !important;
   display: inline-block;
-  list-style: none !important; }
-  ul.tag-list li {
-    display: inline-block !important; }
+  list-style: none !important;
+}
+
+ul.tag-list li {
+  display: inline-block !important;
+}
 
 .navbar-brand {
   font-family: "Roboto", sans-serif;
   font-size: 1.5rem !important;
   padding-top: 0rem !important;
   margin-right: 2rem !important;
-  color: #860202 !important; }
+  color: white !important;
+}
 
 .nav-link .user-pic {
   height: 26px;
   border-radius: 50px;
   float: left;
-  margin-right: 5px; }
+  margin-right: 5px;
+}
 
 .nav-link:hover {
-  transition: 0.1s all; }
+  transition: 0.1s all;
+}
 
 .nav-pills.outline-active .nav-link {
   border-radius: 0px;
   border: none;
   border-bottom: 2px solid transparent;
   background: transparent;
-  color: #aaa; }
-  .nav-pills.outline-active .nav-link:hover {
-    color: #555; }
-  .nav-pills.outline-active .nav-link.active {
-    background: #fff !important;
-    border-bottom: 2px solid #860202 !important;
-    color: #860202 !important; }
+  color: #aaa;
+}
+
+.nav-pills.outline-active .nav-link:hover {
+  color: #555;
+}
+
+.nav-pills.outline-active .nav-link.active {
+  background: #fff !important;
+  border-bottom: 2px solid #860202 !important;
+  color: #860202 !important;
+}
 
 footer {
   background: #f3f3f3;
@@ -62,232 +274,326 @@ footer {
   padding: 1rem 0;
   position: absolute;
   bottom: 0;
-  width: 100%; }
-  footer .logo-font {
-    vertical-align: middle; }
-  footer .attribution {
-    vertical-align: middle;
-    margin-left: 10px;
-    font-size: 0.8rem;
-    color: #bbb;
-    font-weight: 300; }
+  width: 100%;
+}
+
+footer .logo-font {
+  vertical-align: middle;
+}
+
+footer .attribution {
+  vertical-align: middle;
+  margin-left: 10px;
+  font-size: 0.8rem;
+  color: #bbb;
+  font-weight: 300;
+}
 
 .error-messages {
   color: #B85C5C !important;
-  font-weight: bold; }
+  font-weight: bold;
+}
 
 .banner {
   color: #fff;
   background: #333;
   padding: 2rem;
-  margin-bottom: 2rem; }
-  .banner h1 {
-    text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-    margin-bottom: 0px; }
+  margin-bottom: 2rem;
+}
+
+.banner h1 {
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  margin-bottom: 0px;
+}
 
 .container.page {
-  margin-top: 1.5rem; }
+  margin-top: 1.5rem;
+}
 
 .preview-link {
-  color: inherit !important; }
-  .preview-link:hover {
-    text-decoration: inherit !important; }
+  color: inherit !important;
+}
+
+.preview-link:hover {
+  text-decoration: inherit !important;
+}
 
 .achievement-meta {
   display: block;
   position: relative;
-  font-weight: 300; }
-  .achievement-meta img {
-    display: inline-block;
-    vertical-align: middle;
-    height: 32px;
-    width: 32px;
-    border-radius: 30px; }
-  .achievement-meta .info {
-    margin: 0 1.5rem 0 0.3rem;
-    display: inline-block;
-    vertical-align: middle;
-    line-height: 1rem; }
-    .achievement-meta .info .author {
-      display: block;
-      font-weight: 500 !important; }
-    .achievement-meta .info .date {
-      color: #bbb;
-      font-size: 0.8rem;
-      display: block;
-    }
+  font-weight: 300;
+}
+
+.achievement-meta img {
+  display: inline-block;
+  vertical-align: middle;
+  height: 32px;
+  width: 32px;
+  border-radius: 30px;
+}
+
+.achievement-meta .info {
+  margin: 0 1.5rem 0 0.3rem;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1rem;
+}
+
+.achievement-meta .info .author {
+  display: block;
+  font-weight: 500 !important;
+}
+
+.achievement-meta .info .date {
+  color: #bbb;
+  font-size: 0.8rem;
+  display: block;
+}
 
 .achievement-preview {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding: 1.5rem 0;
 }
-  .achievement-preview .achievement-meta {
-    margin: 0 0 1rem 0;
-  }
-  .achievement-preview .preview-link h1 {
-    font-weight: 600 !important;
-    font-size: 1.5rem !important;
-    margin-bottom: 3px;
-  }
-  .achievement-preview .preview-link p {
-    font-weight: 300;
-    font-size: 24px;
-    color: #999;
-    margin-bottom: 15px;
-    font-size: 1rem;
-    line-height: 1.3rem;
-   }
-  .achievement-preview .preview-link span {
-    max-width: 30%;
-    font-size: 0.8rem;
-    font-weight: 300;
-    color: #bbb;
-    vertical-align: middle;
-  }
-  .achievement-preview .image-preview {
-    max-width: 10%;
-    max-height: 10%;
-  }
-  .achievement-preview .preview-link ul {
-    float: right;
-    max-width: 50%;
-    vertical-align: top; }
-    .achievement-preview .preview-link ul li {
-      font-weight: 300;
-      font-size: 0.8rem !important;
-      padding-top: 0px !important;
-      padding-bottom: 0px !important; }
+
+.achievement-preview .image-preview img {
+  max-width: 20%;
+  max-height: 20%;
+}
+
+.achievement-preview .achievement-meta {
+  margin: 0 0 1rem 0;
+}
+
+.achievement-preview .preview-link h1 {
+  font-weight: 600 !important;
+  font-size: 1.5rem !important;
+  margin-bottom: 3px;
+}
+
+.achievement-preview .preview-link p {
+  font-weight: 300;
+  font-size: 24px;
+  color: #999;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  line-height: 1.3rem;
+}
+
+.achievement-preview .preview-link span {
+  max-width: 30%;
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: #bbb;
+  vertical-align: middle;
+}
+
+.achievement-preview .preview-link ul {
+  float: right;
+  max-width: 50%;
+  vertical-align: top;
+}
+
+.achievement-preview .preview-link ul li {
+  font-weight: 300;
+  font-size: 0.8rem !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
 
 .btn .counter {
-  font-size: 0.8rem !important; }
+  font-size: 0.8rem !important;
+}
+
+.home-page {
+  margin-left: 20px;
+}
 
 .home-page .banner {
   background: #860202;
-  box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.3), inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3); }
-  .home-page .banner p {
-    color: #fff;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 300 !important;
-    margin-bottom: 0px; }
-  .home-page .banner h1 {
-    text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-    font-weight: 700 !important;
-    text-align: center;
-    font-size: 3.5rem;
-    padding-bottom: 0.5rem; }
+  box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.3), inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3);
+}
+
+.home-page .banner p {
+  color: #fff;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300 !important;
+  margin-bottom: 0px;
+}
+
+.home-page .banner h1 {
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  font-weight: 700 !important;
+  text-align: center;
+  font-size: 3.5rem;
+  padding-bottom: 0.5rem;
+}
 
 .home-page .feed-toggle {
-  margin-bottom: -1px; }
+  margin-bottom: -1px;
+}
+
+.home-page .feed-toggle {
+  text-align: center;
+}
 
 .home-page .sidebar {
   padding: 5px 10px 10px 10px;
   background: #f3f3f3;
-  border-radius: 4px; }
-  .home-page .sidebar p {
-    margin-bottom: 0.2rem; }
+  border-radius: 4px;
+}
+
+.home-page .sidebar p {
+  margin-bottom: 0.2rem;
+}
 
 .achievement-page .banner {
-  padding: 2rem 0 2rem 0; }
-  .achievement-page .banner h1 {
-    font-size: 2.8rem;
-    font-weight: 600; }
-  .achievement-page .banner .btn {
-    opacity: 0.8; }
-    .achievement-page .banner .btn:hover {
-      transition: 0.1s all;
-      opacity: 1; }
-  .achievement-page .banner .achievement-meta {
-    margin: 2rem 0 0 0; }
-    .achievement-page .banner .achievement-meta .author {
-      color: #fff; }
+  padding: 2rem 0 2rem 0;
+}
+
+.achievement-page .banner h1 {
+  font-size: 2.8rem;
+  font-weight: 600;
+}
+
+.achievement-page .banner .btn {
+  opacity: 0.8;
+}
+
+.achievement-page .banner .btn:hover {
+  transition: 0.1s all;
+  opacity: 1;
+}
+
+.achievement-page .banner .achievement-meta {
+  margin: 2rem 0 0 0;
+}
+
+.achievement-page .banner .achievement-meta .author {
+  color: #fff;
+}
 
 .achievement-page .achievement-content p {
   font-family: 'Roboto', serif;
   font-size: 1.2rem;
   line-height: 1.8rem;
-  margin-bottom: 2rem; }
+  margin-bottom: 2rem;
+}
 
 .achievement-page .achievement-content h1, .achievement-page .achievement-content h2, .achievement-page .achievement-content h3, .achievement-page .achievement-content h4, .achievement-page .achievement-content h5, .achievement-page .achievement-content h6 {
   font-weight: 500 !important;
-  margin: 1.6rem 0 1rem 0; }
+  margin: 1.6rem 0 1rem 0;
+}
 
 .achievement-page .achievement-actions {
   text-align: center;
-  margin: 1.5rem 0 3rem 0; }
-  .achievement-page .achievement-actions .achievement-meta .info {
-    text-align: left; }
+  margin: 1.5rem 0 3rem 0;
+}
+
+.achievement-page .achievement-actions .achievement-meta .info {
+  text-align: left;
+}
 
 .achievement-page .comment-form .card-block {
-  padding: 0; }
-  .achievement-page .comment-form .card-block textarea {
-    border: 0px;
-    padding: 1.25rem; }
+  padding: 0;
+}
+
+.achievement-page .comment-form .card-block textarea {
+  border: 0px;
+  padding: 1.25rem;
+}
 
 .achievement-page .comment-form .card-footer .btn {
   font-weight: 700;
-  float: right; }
+  float: right;
+}
 
 .achievement-page .comment-form .card-footer .comment-author-img {
   height: 30px;
-  width: 30px; }
+  width: 30px;
+}
 
 .achievement-page .card {
   border: 1px solid #e5e5e5;
-  box-shadow: none !important; }
-  .achievement-page .card .card-footer {
-    border-top: 1px solid #e5e5e5;
-    box-shadow: none !important;
-    font-size: 0.8rem;
-    font-weight: 300; }
-  .achievement-page .card .comment-author-img {
-    display: inline-block;
-    vertical-align: middle;
-    height: 20px;
-    width: 20px;
-    border-radius: 30px; }
-  .achievement-page .card .comment-author {
-    display: inline-block;
-    vertical-align: middle; }
-  .achievement-page .card .date-posted {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 5px;
-    color: #bbb; }
-  .achievement-page .card .mod-options {
-    float: right;
-    color: #333;
-    font-size: 1rem; }
-    .achievement-page .card .mod-options i {
-      margin-left: 5px;
-      opacity: 0.6;
-      cursor: pointer; }
-      .achievement-page .card .mod-options i:hover {
-        opacity: 1; }
+  box-shadow: none !important;
+}
+
+.achievement-page .card .card-footer {
+  border-top: 1px solid #e5e5e5;
+  box-shadow: none !important;
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.achievement-page .card .comment-author-img {
+  display: inline-block;
+  vertical-align: middle;
+  height: 20px;
+  width: 20px;
+  border-radius: 30px;
+}
+
+.achievement-page .card .comment-author {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.achievement-page .card .date-posted {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+  color: #bbb;
+}
+
+.achievement-page .card .mod-options {
+  float: right;
+  color: #333;
+  font-size: 1rem;
+}
+
+.achievement-page .card .mod-options i {
+  margin-left: 5px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.achievement-page .card .mod-options i:hover {
+  opacity: 1;
+}
 
 .profile-page .user-info {
   text-align: center;
   background: #f3f3f3;
-  padding: 2rem 0 1rem 0; }
-  .profile-page .user-info .user-img {
-    width: 100px;
-    height: 100px;
-    border-radius: 100px;
-    margin-bottom: 1rem; }
-  .profile-page .user-info h4 {
-    font-weight: 700; }
-  .profile-page .user-info p {
-    margin: 0 auto 0.5rem auto;
-    color: #aaa;
-    max-width: 450px;
-    font-weight: 300; }
-  .profile-page .user-info .action-btn {
-    float: right;
-    color: #999;
-    border: 1px solid #999; }
+  padding: 2rem 0 1rem 0;
+}
+
+.profile-page .user-info .user-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+}
+
+.profile-page .user-info h4 {
+  font-weight: 700;
+}
+
+.profile-page .user-info p {
+  margin: 0 auto 0.5rem auto;
+  color: #aaa;
+  max-width: 450px;
+  font-weight: 300;
+}
+
+.profile-page .user-info .action-btn {
+  float: right;
+  color: #999;
+  border: 1px solid #999;
+}
 
 .profile-page .achievements-toggle {
-  margin: 1.5rem 0 -1px 0; }
+  margin: 1.5rem 0 -1px 0;
+}
 
 .editor-page .tag-list i {
   font-size: 0.6rem;

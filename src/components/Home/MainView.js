@@ -57,7 +57,7 @@ const TagFilterTab = props => {
 const mapStateToProps = state => ({
   ...state.achievementList,
   token: state.common.token,
-  tags: state.home.tags
+  // tags: state.home.tags
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -72,7 +72,7 @@ const mapDispatchToProps = dispatch => ({
 const MainView = props => {
   const onSetPage = page => props.onSetPage(props.tab, page);
   return (
-    <div className="col-md-9">
+    <div className="col-md-8">
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
 
