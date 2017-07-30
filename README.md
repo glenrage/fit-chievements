@@ -1,10 +1,10 @@
 # Fit-chievements
 
-This was a project for learning React/Redux. I wanted to learn advanced full-stack application features, such as pagination, queryable endpoints and one to many database relationships.
+This was a project for learning React/Redux. I wanted to learn advanced full-stack application features, such as pagination, queryable endpoints and one to many database relationships. 
 
 Fit-chievements is a social media application where users can post their fitness related achievements. Recent Facebook trends have frowned upon people "checking in" while they are at the gym, or posting pictures of their bland salads. Fit-chievements solves the problem by offering fitness enthusiasts a place to post their fitness achievements and gain self esteem points and validation from other users.
 
-http://fit-chievements.s3-website-us-west-2.amazonaws.com/#/
+http://fit-chievements.s3-website-us-west-2.amazonaws.com/
 
 ## Getting Started
 
