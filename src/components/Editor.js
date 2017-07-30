@@ -68,7 +68,7 @@ class Editor extends React.Component {
       const promise = this.props.achievementSlug ?
         agent.Achievements.update(Object.assign(achievement, slug)) :
         agent.Achievements.create(achievement);
-        console.log('submit' + JSON.stringify(achievement))
+      
       this.props.onSubmit(promise);
     }
 
