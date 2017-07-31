@@ -4,9 +4,7 @@ import agent from '../agent';
 import { connect } from 'react-redux';
 import request from 'superagent';
 import Dropzone from 'react-dropzone';
-
-const CLOUDINARY_UPLOAD_PRESET = 'vj7a0ppk'
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/glenrage/upload'
+import { CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL } from '../constants/api.js'
 
 class SettingsForm extends React.Component {
   constructor() {
@@ -34,7 +32,6 @@ class SettingsForm extends React.Component {
       if (!user.password) {
         delete user.password;
       }
-      console.log(JSON.stringify(user))
       this.props.onSubmitForm(user);
     };
 
@@ -111,7 +108,7 @@ class SettingsForm extends React.Component {
 
             <div>
             { this.state.uploadedFileCloudinaryUrl === '' ? null :
-            <div className="form-control">
+            <div className="form-control-image">
             <p>{this.state.uploadedFile}</p>
             <img src={this.state.uploadedFileCloudinaryUrl} alt="" />
             </div> }

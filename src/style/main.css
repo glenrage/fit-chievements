@@ -299,6 +299,19 @@ footer .attribution {
   font-weight: bold;
 }
 
+.form-control-image img {
+  max-width: 30%;
+  max-height: 30%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: #55595c;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  display: block;
+}
+
 .banner {
   color: #fff;
   background: #4e494a;

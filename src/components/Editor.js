@@ -4,9 +4,7 @@ import agent from '../agent';
 import { connect } from 'react-redux';
 import request from 'superagent';
 import Dropzone from 'react-dropzone';
-
-const CLOUDINARY_UPLOAD_PRESET = 'vj7a0ppk'
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/glenrage/upload'
+import { CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL } from '../constants/api.js'
 
 const mapStateToProps = state => ({
   ...state.editor
@@ -68,7 +66,7 @@ class Editor extends React.Component {
       const promise = this.props.achievementSlug ?
         agent.Achievements.update(Object.assign(achievement, slug)) :
         agent.Achievements.create(achievement);
-      
+
       this.props.onSubmit(promise);
     }
 
