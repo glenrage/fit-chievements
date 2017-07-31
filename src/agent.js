@@ -1,10 +1,8 @@
 import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
+import {API_ROOT} from './constants/api.js';
 
 const superagent = superagentPromise(_superagent, global.Promise);
-
-// const API_ROOT = 'http://localhost:3000/api';
-const API_ROOT = 'https://fitchievements-api.herokuapp.com/api';
 
 const responseBody = res => res.body;
 
@@ -24,7 +22,6 @@ const requests = {
     superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
   put: (url, body) =>
     superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody),
-
 };
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;

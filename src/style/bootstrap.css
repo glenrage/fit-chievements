@@ -1665,21 +1665,28 @@ pre {
   background-image: none;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.25rem; }
-  .form-control::-ms-expand {
-    background-color: transparent;
-    border: 0; }
-  .form-control:focus {
-    border-color: #66afe9;
-    outline: none; }
-  .form-control::placeholder {
-    color: #999;
-    opacity: 1; }
-  .form-control:disabled, .form-control[readonly] {
-    background-color: #eceeef;
-    opacity: 1; }
-  .form-control:disabled {
-    cursor: not-allowed; }
+  border-radius: 0.25rem;
+}
+
+.form-control::-ms-expand {
+  background-color: transparent;
+  border: 0;
+}
+.form-control:focus {
+  border-color: #66afe9;
+  outline: none;
+}
+.form-control::placeholder {
+  color: #999;
+  opacity: 1;
+}
+.form-control:disabled, .form-control[readonly] {
+  background-color: #eceeef;
+  opacity: 1;
+}
+.form-control:disabled {
+  cursor: not-allowed;
+}
 
 select.form-control:not([size]):not([multiple]) {
   height: 2.5rem; }

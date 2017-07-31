@@ -1,6 +1,6 @@
 # Fit-chievements
 
-This was a project for learning React/Redux. I wanted to learn advanced full-stack application features, such as pagination, queryable endpoints and one to many database relationships. 
+This was a project for learning React/Redux. I wanted to learn advanced full-stack application features, such as pagination, queryable endpoints and one to many database relationships.
 
 Fit-chievements is a social media application where users can post their fitness related achievements. Recent Facebook trends have frowned upon people "checking in" while they are at the gym, or posting pictures of their bland salads. Fit-chievements solves the problem by offering fitness enthusiasts a place to post their fitness achievements and gain self esteem points and validation from other users.
 
@@ -22,15 +22,7 @@ npm i
 npm run start
 ```
 
-This installs all packages for the back end, you must install packages for the front end as well. Npm run start will fire up the server.
-
-
-```
-cd fit-chievements/client
-npm i
-npm run start
-```
-Now that the server is running, open your browser to
+Now that the server is running, open your browser to.
 http://localhost:3001
 
 
@@ -39,7 +31,7 @@ http://localhost:3001
 Tests coming soon
 
 ```
-npm run
+npm run test
 
 ```
 
@@ -57,3 +49,7 @@ https://thinkster.io/
 
 ## Todos
 * [ ]Optimize for Mobile Devices
+
+
+## Known Bugs
+* [ ]Cannot upload photo on mobile iOS Chrome 
