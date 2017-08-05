@@ -2,12 +2,19 @@
   "name": "front",
   "version": "0.1.0",
   "private": true,
+  "directories": {
+    "test": "test"
+  },
   "dependencies": {
+    "chai": "^4.1.0",
     "cloudinary-react": "^1.0.4",
     "history": "^4.3.0",
+    "jest": "^20.0.4",
+    "jest-cli": "^20.0.4",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "marked": "^0.3.6",
+    "mocha": "^3.5.0",
     "prop-types": "^15.5.10",
     "react": "^15.5.0",
     "react-dom": "^15.5.0",
@@ -26,9 +33,9 @@
     "s3": "^4.4.0"
   },
   "scripts": {
+    "test": "jest",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "NODE_ENV=production npm run build && node deploy build"
   }
