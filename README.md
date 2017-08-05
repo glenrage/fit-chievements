@@ -1,4 +1,10 @@
 # Fit-chievements
+[![Build Status](https://travis-ci.org/glenrage/fit-chievements.svg?branch=master)](https://travis-ci.org/glenrage/fit-chievements)
+[![Coverage Status](https://coveralls.io/repos/github/glenrage/fit-chievements/badge.svg?branch=master)](https://coveralls.io/github/glenrage/fit-chievements?branch=master)
+[![dependencies Status](https://david-dm.org/expressjs/express/status.svg)](https://david-dm.org/expressjs/express)
+[![devDependencies Status](https://david-dm.org/expressjs/express/dev-status.svg)](https://david-dm.org/expressjs/express?type=dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
 This was a project for learning React/Redux. I wanted to learn advanced full-stack application features, such as pagination, queryable endpoints and one to many database relationships.
 
@@ -52,4 +58,4 @@ https://thinkster.io/
 
 
 ## Known Bugs
-* [ ]Cannot upload photo on mobile iOS Chrome 
+* [ ]Cannot upload photo on mobile iOS Chrome
