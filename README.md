@@ -33,8 +33,7 @@ http://localhost:3001
 
 
 ## Running the tests
-
-Tests coming soon
+Testing not complete yet..
 
 ```
 npm run test
@@ -55,6 +54,7 @@ https://thinkster.io/
 
 ## Todos
 * [ ]Optimize for Mobile Devices
+* [ ]Unit testing Front End
 
 
 ## Known Bugs
